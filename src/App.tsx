@@ -1,8 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+type Todos = {
+  userId: number;
+  id: number;
+  title: "string";
+  completed: boolean;
+};
+
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todos[]>([]);
 
   useEffect(() => {
     loadData();
@@ -17,26 +24,23 @@ function App() {
       })
       .catch((e) => {
         console.log(e.message);
-        alert("Something wrong!");
       });
-  }
-  if (todos.length > 0) {
-    console.log(todos)
   }
 
   return (
     <>
-      {/* {todos.length > 0 ? (
+      {todos.length > 0 ? (
         <ul>
-          {todos?.map((t, i) => (
-            <li key={i}>
-              {t}
+          {todos?.map((t) => (
+            <li key={t.id}>
+              <input type="checkbox" checked={t.completed} readOnly />
+              {t.title}
             </li>
           ))}
         </ul>
       ) : (
         <p>Await...</p>
-      )} */}
+      )}
     </>
   );
 }
