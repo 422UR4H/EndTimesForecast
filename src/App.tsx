@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 type Todos = {
   userId: number;
@@ -18,11 +19,20 @@ function App() {
   function loadData() {
     const URL = import.meta.env.VITE_API_URL;
     axios
-      .get(`${URL}/todos`)
+      .get(`${URL}/todosa`)
       .then(({ data }) => {
         setTodos(data);
       })
       .catch((e) => {
+        Swal.fire({
+          title: "Ooops",
+          text: "Something went wrong",
+          timer: 5000,
+          showCloseButton: true,
+          confirmButtonText: "Okay...",
+          confirmButtonColor: "red",
+          icon: "error",
+        });
         console.log(e.message);
       });
   }
