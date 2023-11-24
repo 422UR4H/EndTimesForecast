@@ -8,8 +8,8 @@ type WeatherBoxProps = {
 export default function WeatherBox({ title, value }: WeatherBoxProps) {
   return (
     <StyledWeatherBox>
-      {title}
-      {value}
+      <h1>{title}</h1>
+      <p>{value}</p>
     </StyledWeatherBox>
   );
 }
