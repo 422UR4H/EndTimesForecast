@@ -3,11 +3,16 @@ import styled from "styled-components";
 const StyledMainInput = styled.input`
   width: 500px;
   height: 80px;
+  padding-top: 8px;
+  padding-left: 67px;
+  margin-bottom: 7px;
   border-radius: 24px;
+  // TODO: refactor with theme color
+  box-shadow: 0px 24px 48px 0px #314F7C14;
+  border: none;
 
   color: ${({ theme }) => theme.colors.primaryText};
   background-color: ${({ theme }) => theme.colors.primaryBackground};
-  box-shadow: 0px 24px 48px 0px #314F7C14;
 
   &::placeholder {
     font-family: 'Montserrat', sans-serif;
