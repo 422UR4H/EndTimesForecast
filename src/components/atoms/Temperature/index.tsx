@@ -3,8 +3,10 @@ import StyledTemperature from "./styled";
 export default function Temperature() {
   return (
     <StyledTemperature>
-      <h1>31</h1>
-      <h2>°C</h2>
+      <div>
+        <span className="value">31</span>
+        <span className="unit">°C</span>
+      </div>
       <p>Céu aberto</p>
     </StyledTemperature>
   );
