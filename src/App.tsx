@@ -1,11 +1,7 @@
-// import axios from "axios";
-import { useEffect } from "react";
 import GlobalStyles from "./styles/global";
 import { ThemeProvider, DefaultTheme } from "styled-components";
 import light from './styles/themes/light';
 import dark from './styles/themes/dark';
-import Swal from "sweetalert2";
-import Switch from "react-switch";
 import usePersistedState from "./hooks/usePersistedState";
 import HomePage from "./pages/HomePage";
 
@@ -27,7 +23,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <HomePage theme={theme} toggleTheme={toggleTheme} />
+      <HomePage themeTitle={theme.title} toggleTheme={toggleTheme} />
     </ThemeProvider>
   );
 }
