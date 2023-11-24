@@ -1,22 +1,22 @@
 import ReactSwitch from "react-switch";
-import { DefaultTheme } from "styled-components/dist/types";
 
 type MainSwitchProps = {
-  theme: DefaultTheme;
-  toggleTheme(): void;
+  checked: boolean;
+  toggle(): void;
 };
 
-export default function MainSwitch({ theme, toggleTheme }: MainSwitchProps) {
+export default function MainSwitch({ checked, toggle }: MainSwitchProps) {
   return (
     <ReactSwitch
-      onChange={toggleTheme}
-      checked={theme.title === "dark"}
+      onChange={toggle}
+      checked={checked}
       checkedIcon={false}
       uncheckedIcon={false}
       height={31}
       width={51}
       borderRadius={16}
-      // offColor={themeContext?.colors.primary || '#ffffff'}
+      offColor={"#D8D8D8"}
+      onColor={'#4D4494'} // or EC6E4C
       // onColor={themeContext?.colors.secondary || '#000000'}
     />
   );
