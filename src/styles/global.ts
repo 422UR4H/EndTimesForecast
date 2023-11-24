@@ -10,7 +10,10 @@ export default createGlobalStyle`
   body {
     background-color: ${({ theme }) => theme.colors.primaryBackground};
     color: ${({ theme }) => theme.colors.primaryText};
-    font-size: 14px;
-    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 48px;
+    letter-spacing: 0em;
+    font-family: 'Poppins', sans-serif;
   }
 `
