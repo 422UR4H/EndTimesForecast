@@ -1,4 +1,3 @@
-import { DefaultTheme } from "styled-components";
 import StyledMainInput from "../styles/MainInput";
 import { useState } from "react";
 import Header from "../components/molecules/Header";
@@ -8,13 +7,14 @@ import SwitchBox from "../components/organisms/SwitchBox";
 import Locality from "../components/atoms/Locality";
 import WeaterContent from "../components/organisms/WeatherContent";
 import StyledHomePage from "./styled";
+import Date from "../components/atoms/Date";
 
 type HomePageProps = {
-  theme: DefaultTheme;
+  themeTitle: string;
   toggleTheme(): void;
 };
 
-export default function HomePage({ theme, toggleTheme }: HomePageProps) {
+export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   const [city, setCity] = useState("");
 
   // TODO: type this
@@ -24,7 +24,7 @@ export default function HomePage({ theme, toggleTheme }: HomePageProps) {
 
   return (
     <StyledHomePage>
-      <div>
+      <div className="sidebar">
         <Header />
         <StyledMainInput
           name="city"
@@ -33,12 +33,14 @@ export default function HomePage({ theme, toggleTheme }: HomePageProps) {
           value={city}
           onChange={handleInput}
         />
+        {/* // TODO: refactor to info here */}
         <Temperature />
         <StyledLine />
-        <SwitchBox theme={theme} toggleTheme={toggleTheme} />
+        <Date />
+        <SwitchBox value={themeTitle} toggleTheme={toggleTheme} />
         <p>Todos os direitos reservados. 2023.</p>
       </div>
-      <div>
+      <div className="main">
         {/* buttons here */}
         <Locality />
         <WeaterContent />
