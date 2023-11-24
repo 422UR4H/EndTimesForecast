@@ -1,22 +1,21 @@
-import { DefaultTheme } from "styled-components/dist/types";
 import MainSwitch from "../../atoms/MainSwitch";
 import StyledSwitchBox from "./styled";
 
 // TODO: refactor repeated type
 type SwitchBoxProps = {
-  theme: DefaultTheme;
-  toggleTheme(): void;
+  checked: boolean;
+  toggle(): void;
   children: string;
 };
 
 export default function SwitchWrapper({
-  theme,
-  toggleTheme,
+  checked,
+  toggle,
   children,
 }: SwitchBoxProps) {
   return (
     <StyledSwitchBox>
-      <MainSwitch theme={theme} toggleTheme={toggleTheme} />
+      <MainSwitch checked={checked} toggle={toggle} />
       <p>{children}</p>
     </StyledSwitchBox>
   );
