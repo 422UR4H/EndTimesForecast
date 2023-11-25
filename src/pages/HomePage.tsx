@@ -8,6 +8,7 @@ import Locality from "../components/atoms/Locality";
 import WeaterContent from "../components/organisms/WeatherContent";
 import StyledHomePage from "./styled";
 import Date from "../components/atoms/Date";
+import ContainerButtons from "../components/molecules/ContainerButtons";
 
 type HomePageProps = {
   themeTitle: string;
@@ -15,7 +16,19 @@ type HomePageProps = {
 };
 
 export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
-  const [city, setCity] = useState("");
+  const [selected, setSelected] = useState<string>("today");
+  const [city, setCity] = useState<string>("");
+
+  // TODO: type and improve this
+  function handleClick(e: any) {
+    const { innerHTML } = e.target;
+
+    if (isTodayClicked(innerHTML) && !isTodaySelected(selected)) {
+      setSelected("today");
+    } else if (!isTodayClicked(innerHTML) && isTodaySelected(selected)) {
+      setSelected("nextDays");
+    }
+  }
 
   // TODO: type this
   function handleInput(e: any): void {
@@ -41,7 +54,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         <p>Todos os direitos reservados. 2023.</p>
       </div>
       <div className="main">
-        {/* buttons here */}
+        <ContainerButtons selected={selected} handleClick={handleClick} />
         <Locality />
         <WeaterContent />
         <p>
@@ -50,4 +63,12 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
       </div>
     </StyledHomePage>
   );
+}
+
+function isTodayClicked(innerHtml: string): boolean {
+  return innerHtml === "Hoje";
+}
+
+function isTodaySelected(selected: string): boolean {
+  return selected === "today";
 }
