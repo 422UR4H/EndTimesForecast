@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const StyledWeatherBox = styled.div`
-  width: 500px;
-  height: 180px;
+  max-width: 500px;
+  /* height: 180px; */
+  /* min-height: 100px; */
   border-radius: 32px;
-  margin-right: 50px;
   padding-block: 50px;
   padding-inline: 45px;
 
@@ -14,6 +14,7 @@ const StyledWeatherBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 13px;
 
   h1 {
     font-size: 22px;
