@@ -1,5 +1,5 @@
 import StyledMainInput from "../styles/MainInput";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "../components/molecules/Header";
 import Temperature from "../components/atoms/Temperature";
 import StyledLine from "../styles/Line";
@@ -18,6 +18,7 @@ type HomePageProps = {
 export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   const [selected, setSelected] = useState<string>("today");
   const [city, setCity] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // TODO: type and improve this
   function handleClick(e: any) {
@@ -33,19 +34,38 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   // TODO: type this
   function handleInput(e: any): void {
     setCity(e.target.value);
+    console.log(e.nativeEvent.data)
+
+    if (e.nativeEvent.data === "Enter") {
+      console.log("foi")
+    }
+  }
+
+  function handleSubmit(e: any): void {
+    e.preventDefault();
+
+  }
+
+  function handleKeyDown(e: any): void {
+    e.preventDefault();
+
   }
 
   return (
     <StyledHomePage>
       <div className="sidebar">
         <Header />
-        <StyledMainInput
-          name="city"
-          type="text"
-          placeholder="Procure por uma cidade"
-          value={city}
-          onChange={handleInput}
-        />
+        <form onSubmit={handleSubmit}>
+          <StyledMainInput
+            ref={inputRef}
+            name="city"
+            type="text"
+            placeholder="Procure por uma cidade"
+            value={city}
+            // onKeyDown={handleKeyDown}
+            onChange={handleInput}
+          />
+        </form>
         {/* // TODO: refactor to info here */}
         <Temperature />
         <StyledLine />
@@ -58,7 +78,8 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         <Locality />
         <WeaterContent />
         <p>
-          Dados fornecidos pela <a>Open Weather API</a>
+          Dados fornecidos pela{" "}
+          <a href="https://openweathermap.org/">Open Weather API</a>
         </p>
       </div>
     </StyledHomePage>
