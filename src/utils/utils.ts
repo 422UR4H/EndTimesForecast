@@ -1,3 +1,4 @@
+import { Dayjs } from "dayjs";
 import Swal from "sweetalert2";
 
 function errorAlert(): void {
@@ -24,7 +25,7 @@ function convertKelvinToFahrenheit(kelvin: number): string {
   return Math.round(((kelvin - 273.15) * 9) / 5 + 32) + "°F";
 }
 
-function dateFormat(date: string | Date, joinChar = '-') {
+function dateFormat(date: string | Date | Dayjs, joinChar = '-') {
   if (typeof date !== 'string') date = date.toISOString();
   return date.split('T')[0].split('-').reverse().join(joinChar);
 }
