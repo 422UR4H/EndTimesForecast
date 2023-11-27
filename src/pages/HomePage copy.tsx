@@ -12,6 +12,7 @@ import ContainerButtons from "../components/molecules/ContainerButtons";
 import api from "../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 import Swal from "sweetalert2";
+import utils from "../utils/utils";
 
 type HomePageProps = {
   themeTitle: string;
@@ -25,14 +26,14 @@ type CityLatLng = {
 };
 
 export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
-  const [selected, setSelected] = useState<string>("today");
+  const inputRef = useRef<HTMLInputElement>(null);
   const [inputCity, setInputCity] = useState<string>("");
+  const [selected, setSelected] = useState<string>("today");
   const [cityLatLng, setCityLatLng] = useState<CityLatLng>({
     city: "",
     lat: 0,
     lng: 0,
   });
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // TODO: type and improve this
   function handleClick(e: any) {
@@ -52,24 +53,33 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
 
   async function handleSubmit(e: any): Promise<void> {
     e.preventDefault();
-    // selectUserCity([
-    //   { nome: 'Cidade A', pais: 'País A', latitude: 123, longitude: 456 },
-    //   { nome: 'Cidade B', pais: 'País B', latitude: 789, longitude: 987 },
-    // ])
 
+    let selectedCity: CityLatLng | undefined;
     api
       .getGeocoding(inputCity)
       .then((response: AxiosResponse) => {
-        // console.log(response);
-        const selectedCity = selectUserCity(response.data.results);
+        selectedCity = selectUserCity(response.data.results);
+        if (selectedCity == undefined) return utils.errorAlert();
+
+        setCityLatLng(selectedCity);
+        api
+          .getWeather(selectedCity.lat, selectedCity.lng)
+          .then((response: AxiosResponse) => {
+            console.log(response);
+          })
+          .catch((error: AxiosError) => {
+            console.log(error);
+            utils.errorAlert();
+          });
+
       })
       .catch((error: AxiosError) => {
         console.log(error);
-        // TODO: message to user
+        utils.errorAlert();
       });
   }
 
-  function selectUserCity(cities: any[]) {
+  function selectUserCity(cities: any[]): CityLatLng | undefined {
     const options: any = {};
     cities.forEach((city, i) => {
       const { state, state_district, state_code } = city.components;
@@ -87,29 +97,28 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
       showCancelButton: true,
       cancelButtonText: "Cancelar",
       width: 750,
+      // width: "auto",
       inputValidator: (value) => {
-        if (!value) {
-          return "Você precisa escolher uma cidade";
-        }
+        if (!value) return "Você precisa escolher uma cidade";
       },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const escolhaUsuario = parseInt(result.value); // Obtendo a escolha do usuário como um número inteiro
-        const cidadeEscolhida = cities[escolhaUsuario]; // Obtendo a cidade escolhida com base no índice
-        const latitude = cidadeEscolhida.latitude;
-        const longitude = cidadeEscolhida.longitude;
-        console.log(latitude, longitude);
-        // Continuar com a lógica para utilizar a latitude e longitude escolhidas
-        // ...
-      }
-    });
+    })
+      .then((result) => {
+        console.log("foi")
+        if (result.isConfirmed) {
+          console.log(cities);
+          const city = cities[parseInt(result.value)];
+          console.log("city");
+          const { lat, lng } = city.geometry;
+          return { city: city.components.city, lat, lng };
+        }
+      })
+      .catch((error) => {
+        console.log("options")
+        console.log(error);
+        utils.errorAlert();
+      });
+    return undefined;
   }
-
-  // async function handleKeyDown(e: any): Promise<void> {
-  //   e.preventDefault();
-  //   if (e.key === "Enter") await handleSubmit();
-  //   handleInput(e);
-  // }
 
   return (
     <StyledHomePage>
@@ -123,7 +132,6 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
             placeholder="Procure por uma cidade"
             value={inputCity}
             onChange={handleInput}
-            // onKeyDown={handleKeyDown}
           />
         </form>
         {/* // TODO: refactor to info here */}
