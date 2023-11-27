@@ -7,7 +7,7 @@ import SwitchBox from "../components/organisms/SwitchBox";
 import Locality from "../components/atoms/Locality";
 import WeaterContent from "../components/organisms/WeatherContent";
 import StyledHomePage from "./styled";
-import Date from "../components/atoms/Date";
+import MainDate from "../components/atoms/MainDate";
 import ContainerButtons from "../components/molecules/ContainerButtons";
 import api from "../services/api";
 import { AxiosError, AxiosResponse } from "axios";
@@ -158,7 +158,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         {/* // TODO: refactor to info here */}
         <Temperature temperature={avgTemperature} unit={unit} skyStatus={sky} />
         <StyledLine />
-        <Date />
+        <MainDate />
         <SwitchBox
           theme={themeTitle}
           toggleTheme={toggleTheme}
