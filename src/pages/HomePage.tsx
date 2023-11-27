@@ -1,5 +1,5 @@
 import StyledMainInput from "../styles/MainInput";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../components/molecules/Header";
 import Temperature from "../components/atoms/Temperature";
 import StyledLine from "../styles/Line";
@@ -12,27 +12,88 @@ import ContainerButtons from "../components/molecules/ContainerButtons";
 import api from "../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 import Swal from "sweetalert2";
+import CitiesModal from "../components/molecules/CitiesModal";
+import usePersistedState from "../hooks/usePersistedState";
 
 type HomePageProps = {
   themeTitle: string;
   toggleTheme(): void;
 };
 
-type CityLatLng = {
-  city: string;
+export type CityLatLng = {
+  // city: string;
   lat: string | number;
   lng: string | number;
 };
 
+export type CityData = {
+  state: string;
+  state_district: string;
+  state_code: string;
+  cityLatLng: CityLatLng;
+};
+
+export type WeatherData = {
+  min: number;
+  max: number;
+  humidity: number;
+  windSpeed: number;
+};
+
 export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
+  // TODO: type this
+  const [citiesData, setCitiesData] = useState<CityData[]>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [avgTemperature, setAvgTemperature] = useState<number>(0);
+  const [sky, setSky] = useState<string>("");
   const [selected, setSelected] = useState<string>("today");
   const [inputCity, setInputCity] = useState<string>("");
-  const [cityLatLng, setCityLatLng] = useState<CityLatLng>({
-    city: "",
+  const [cityLatLng, setCityLatLng] = usePersistedState<CityLatLng>("lat_lng", {
+    // city: "",
     lat: 0,
     lng: 0,
   });
+  const [weatherData, setWeatherData] = useState<WeatherData>({
+    min: 0,
+    max: 0,
+    humidity: 0,
+    windSpeed: 0,
+  });
+  const [unit, setUnit] = usePersistedState<string>(
+    "temperatureUnit",
+    "celsius"
+  );
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (cityLatLng?.lat == undefined || cityLatLng?.lng == undefined) {
+      return;
+    }
+    api
+      .getWeather(cityLatLng.lat, cityLatLng.lng)
+      .then((response: AxiosResponse) => {
+        console.log(response);
+
+        const { temp, temp_max, temp_min, humidity } = response.data.main;
+        const weather: WeatherData = {
+          min: temp_min,
+          max: temp_max,
+          humidity,
+          windSpeed: response.data.wind.speed,
+        };
+        setWeatherData(weather);
+        setAvgTemperature(temp);
+        setSky(response.data.weather[0].main)
+      })
+      .catch((error: AxiosError) => {
+        console.log(error);
+        // utils.errorAlert();
+      });
+  }, [cityLatLng]);
+
+  function toggleUnit() {
+    setUnit(unit === "celsius" ? "fahrenheit" : "celsius");
+  }
 
   // TODO: type and improve this
   function handleClick(e: any) {
@@ -52,16 +113,19 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
 
   async function handleSubmit(e: any): Promise<void> {
     e.preventDefault();
-    // selectUserCity([
-    //   { nome: 'Cidade A', pais: 'País A', latitude: 123, longitude: 456 },
-    //   { nome: 'Cidade B', pais: 'País B', latitude: 789, longitude: 987 },
-    // ])
 
     api
       .getGeocoding(inputCity)
       .then((response: AxiosResponse) => {
-        // console.log(response);
-        const selectedCity = selectUserCity(response.data.results);
+        const cities: CityData[] = [];
+        response.data.results.forEach((city: any) => {
+          const { state, state_district, state_code } = city.components;
+          const cityLatLng = { lat: city.geometry.lat, lng: city.geometry.lng };
+          cities.push({ state, state_district, state_code, cityLatLng });
+        });
+        setCitiesData(cities);
+        setShowModal(true);
+        // const selectedCity = selectUserCity(response.data.results);
       })
       .catch((error: AxiosError) => {
         console.log(error);
@@ -69,50 +133,16 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
       });
   }
 
-  function selectUserCity(cities: any[]) {
-    const options: any = {};
-    cities.forEach((city, i) => {
-      const { state, state_district, state_code } = city.components;
-      options[`${i}: ${state}`] = {
-        text: `${state_district}, ${state_code}`,
-      };
-    });
-
-    Swal.fire({
-      title: "Escolha sua cidade:",
-      // input: "radio",
-      input: "select",
-      inputOptions: options,
-      inputPlaceholder: "Selecione a cidade",
-      showCancelButton: true,
-      cancelButtonText: "Cancelar",
-      width: 750,
-      inputValidator: (value) => {
-        if (!value) {
-          return "Você precisa escolher uma cidade";
-        }
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const escolhaUsuario = parseInt(result.value); // Obtendo a escolha do usuário como um número inteiro
-        const cidadeEscolhida = cities[escolhaUsuario]; // Obtendo a cidade escolhida com base no índice
-        const latitude = cidadeEscolhida.latitude;
-        const longitude = cidadeEscolhida.longitude;
-        console.log(latitude, longitude);
-        // Continuar com a lógica para utilizar a latitude e longitude escolhidas
-        // ...
-      }
-    });
-  }
-
-  // async function handleKeyDown(e: any): Promise<void> {
-  //   e.preventDefault();
-  //   if (e.key === "Enter") await handleSubmit();
-  //   handleInput(e);
-  // }
-
   return (
     <StyledHomePage>
+      {showModal && (
+        <CitiesModal
+          citiesData={citiesData}
+          setShowModal={setShowModal}
+          setCityLatLng={setCityLatLng}
+        />
+      )}
+
       <div className="sidebar">
         <Header />
         <form onSubmit={handleSubmit}>
@@ -123,20 +153,24 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
             placeholder="Procure por uma cidade"
             value={inputCity}
             onChange={handleInput}
-            // onKeyDown={handleKeyDown}
           />
         </form>
         {/* // TODO: refactor to info here */}
-        <Temperature />
+        <Temperature temperature={avgTemperature} unit={unit} skyStatus={sky} />
         <StyledLine />
         <Date />
-        <SwitchBox value={themeTitle} toggleTheme={toggleTheme} />
+        <SwitchBox
+          theme={themeTitle}
+          toggleTheme={toggleTheme}
+          unit={unit}
+          toggleUnit={toggleUnit}
+        />
         <p>Todos os direitos reservados. 2023.</p>
       </div>
       <div className="main">
         <ContainerButtons selected={selected} handleClick={handleClick} />
         <Locality />
-        <WeaterContent />
+        <WeaterContent weatherData={weatherData} unit={unit} />
         <p>
           Dados fornecidos pela{" "}
           <a href="https://openweathermap.org/">Open Weather API</a>
