@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 
 async function getGeocoding(city: string, country = "Brasil")/*: Promise<AxiosResponse | AxiosError | void> */{
   const URL = import.meta.env.VITE_GEOCODING_API_URL;

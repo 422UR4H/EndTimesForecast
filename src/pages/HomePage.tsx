@@ -11,7 +11,6 @@ import MainDate from "../components/atoms/MainDate";
 import ContainerButtons from "../components/molecules/ContainerButtons";
 import api from "../services/api";
 import { AxiosError, AxiosResponse } from "axios";
-import Swal from "sweetalert2";
 import CitiesModal from "../components/molecules/CitiesModal";
 import usePersistedState from "../hooks/usePersistedState";
 
