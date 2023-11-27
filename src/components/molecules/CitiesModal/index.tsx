@@ -1,4 +1,4 @@
-import { CityData } from "../../../pages/HomePage";
+import { CityData, CityLatLng } from "../../../pages/HomePage";
 import MainButton from "../../atoms/MainButton";
 import Overlay from "../../atoms/Overlay";
 import StyledModal from "./styled";
@@ -6,16 +6,18 @@ import StyledModal from "./styled";
 type CitiesModalProps = {
   citiesData: CityData[];
   setShowModal(b: boolean): void;
+  setCityLatLng(cityLatLng: CityLatLng): void;
 };
 
 export default function CitiesModal({
   citiesData,
   setShowModal,
+  setCityLatLng,
 }: CitiesModalProps) {
-  function onClick(e: any): void {
-    console.log(e.target);
+  function handleClick(cityLatLng: CityLatLng) {
+    setCityLatLng(cityLatLng);
+    setShowModal(false);
   }
-  console.log(citiesData);
 
   return (
     <StyledModal>
@@ -23,7 +25,7 @@ export default function CitiesModal({
       <div className="cities-list">
         <h1>Escolha sua cidade</h1>
         {citiesData.map((cityData, i) => (
-          <MainButton key={i} onClick={onClick}>
+          <MainButton key={i} onClick={() => handleClick(cityData.cityLatLng)}>
             <h2>
               {i + 1}: {cityData.state}
             </h2>
