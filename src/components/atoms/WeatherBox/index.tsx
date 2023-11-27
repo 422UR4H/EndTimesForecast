@@ -2,7 +2,7 @@ import StyledWeatherBox from "./styled";
 
 type WeatherBoxProps = {
   title: string;
-  value: string;
+  value: string | number;
 };
 
 export default function WeatherBox({ title, value }: WeatherBoxProps) {
