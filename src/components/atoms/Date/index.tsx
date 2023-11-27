@@ -1,10 +1,13 @@
+import dayjs from "dayjs";
+import utils from "../../../utils/utils";
 import StyledDate from "./StyledDate";
 
 export default function Date() {
+  const date = dayjs();
   return (
     <StyledDate>
-      <p>16/11/2023</p>
-      <p>Quinta-feira, 16:32</p>
+      <p>{utils.dateFormat(date, '/')}</p>
+      <p>Segunda-feira, 16:32</p>
     </StyledDate>
   );
 }
