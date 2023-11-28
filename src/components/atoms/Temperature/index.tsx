@@ -2,7 +2,7 @@ import utils from "../../../utils/utils";
 import StyledTemperature from "./styled";
 
 type TemperatureProps = {
-  temperature: number;
+  temperature: number | undefined;
   unit: string;
   skyStatus: string;
 };
@@ -10,19 +10,27 @@ type TemperatureProps = {
 type SkyAndColor = {
   sky: string;
   color: string;
-}
+};
 
-export default function Temperature({ temperature, unit, skyStatus }: TemperatureProps) {
+export default function Temperature({
+  temperature,
+  unit,
+  skyStatus,
+}: TemperatureProps) {
   const { sky, color } = formatSkyAndColor(skyStatus);
   const temp: string[] = utils
     .getConvertedTemperature(Number(temperature), unit)
     .split("°");
-  
+
   return (
     <StyledTemperature>
       <div>
-        <span className="value" style={{ color }}>{temp[0]}</span>
-        <span className="unit" style={{ color }}>°{temp[1]}</span>
+        <span className="value" style={{ color }}>
+          {temp[0]}
+        </span>
+        <span className="unit" style={{ color }}>
+          °{temp[1]}
+        </span>
       </div>
       <p>{sky}</p>
     </StyledTemperature>
@@ -45,6 +53,8 @@ function formatSkyAndColor(sky: string): SkyAndColor {
       return { sky: "Chuviscando", color: "#06BCC1" };
     case "Mist":
       return { sky: "Neblina", color: "#D8D8D8" };
-    }
-    return { sky: "Error", color: "red" };
+    case "":
+      return { sky: "Céu indefinido", color: "#EC6E4C" };
+  }
+  return { sky: "Error", color: "red" };
 }

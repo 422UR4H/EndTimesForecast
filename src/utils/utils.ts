@@ -15,18 +15,18 @@ function getConvertedTemperature(kelvin: number, unit: string): string {
 }
 
 function convertKelvinToCelsius(kelvin: number): string {
-  console.log(kelvin);
-  return Math.round(kelvin - 273.15) + "°C";
+  return (isNaN(kelvin) ? 0 : Math.round(kelvin - 273.15)) + "°C";
 }
 
 function convertKelvinToFahrenheit(kelvin: number): string {
-  console.log(kelvin);
-  return Math.round(((kelvin - 273.15) * 9) / 5 + 32) + "°F";
+  return (
+    (isNaN(kelvin) ? 0 : Math.round(((kelvin - 273.15) * 9) / 5 + 32)) + "°F"
+  );
 }
 
-function dateFormat(date: string | Date, joinChar = '-') {
-  if (typeof date !== 'string') date = date.toISOString();
-  return date.split('T')[0].split('-').reverse().join(joinChar);
+function dateFormat(date: string | Date, joinChar = "-") {
+  if (typeof date !== "string") date = date.toISOString();
+  return date.split("T")[0].split("-").reverse().join(joinChar);
 }
 
 const utils = {
