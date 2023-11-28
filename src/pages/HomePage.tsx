@@ -156,7 +156,6 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
             placeholder="Procure por uma cidade"
             value={inputCity}
             onChange={handleInput}
-            // autoFocus
           />
         </form>
         {/* // TODO: refactor to info here */}
