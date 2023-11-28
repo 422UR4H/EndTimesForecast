@@ -14,6 +14,7 @@ const StyledTransparentButton = styled.button<StyledTransparentButtonProps>`
   color: ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.primaryText : theme.colors.secondaryText};
 
+  outline: none;
   cursor: pointer;
 `;
 export default StyledTransparentButton;
