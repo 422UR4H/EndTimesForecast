@@ -5,6 +5,7 @@ type TemperatureProps = {
   temperature: number | undefined;
   unit: string;
   skyStatus: string;
+  weatherIcon: string;
 };
 
 type SkyAndColor = {
@@ -16,7 +17,9 @@ export default function Temperature({
   temperature,
   unit,
   skyStatus,
+  weatherIcon,
 }: TemperatureProps) {
+  console.log(weatherIcon)
   const { sky, color } = formatSkyAndColor(skyStatus);
   const temp: string[] = utils
     .getConvertedTemperature(Number(temperature), unit)
@@ -25,6 +28,7 @@ export default function Temperature({
   return (
     <StyledTemperature>
       <div>
+        <img src={weatherIcon} alt="Weather Icon" />
         <span className="value" style={{ color }}>
           {temp[0]}
         </span>

@@ -48,13 +48,22 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   const [sky, setSky] = useState<string>("");
   const [selected, setSelected] = useState<string>("today");
   const [inputCity, setInputCity] = useState<string>("");
-  const [cityLatLng, setCityLatLng] = usePersistedState<CityLatLng | undefined>("lat_lng", undefined);
+  const [cityLatLng, setCityLatLng] = usePersistedState<CityLatLng | undefined>(
+    "lat_lng",
+    undefined
+  );
   const [weatherData, setWeatherData] = useState<WeatherData | undefined>();
+  const [weatherIcon, setWeatherIcon] = useState<string>("");
   const [unit, setUnit] = usePersistedState<string>(
     "temperatureUnit",
     "celsius"
   );
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const input = inputRef.current;
+    if (input != null) input.focus();
+  }, []);
 
   useEffect(() => {
     if (cityLatLng?.lat == undefined || cityLatLng?.lng == undefined) {
@@ -63,6 +72,10 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
     api
       .getWeather(cityLatLng.lat, cityLatLng.lng)
       .then((response: AxiosResponse) => {
+        const { main, icon } = response.data.weather[0];
+        setSky(main);
+        setWeatherIcon("https://openweathermap.org/img/wn/" + icon + "@2x.png");
+
         const { temp, temp_max, temp_min, humidity } = response.data.main;
         const weather: WeatherData = {
           min: temp_min,
@@ -72,7 +85,6 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         };
         setWeatherData(weather);
         setAvgTemperature(temp);
-        setSky(response.data.weather[0].main);
       })
       .catch((error: AxiosError) => {
         console.log(error);
@@ -102,19 +114,21 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
 
   async function handleSubmit(e: any): Promise<void> {
     e.preventDefault();
-
     api
       .getGeocoding(inputCity)
       .then((response: AxiosResponse) => {
         const cities: CityData[] = [];
         response.data.results.forEach((city: any) => {
           const { state, state_district, state_code } = city.components;
-          const cityLatLng = { city: utils.toUpperFirstLetter(inputCity), lat: city.geometry.lat, lng: city.geometry.lng };
+          const cityLatLng = {
+            city: utils.toUpperFirstLetter(inputCity),
+            lat: city.geometry.lat,
+            lng: city.geometry.lng,
+          };
           cities.push({ state, state_district, state_code, cityLatLng });
         });
         setCitiesData(cities);
         setShowModal(true);
-        // const selectedCity = selectUserCity(response.data.results);
       })
       .catch((error: AxiosError) => {
         console.log(error);
@@ -142,10 +156,16 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
             placeholder="Procure por uma cidade"
             value={inputCity}
             onChange={handleInput}
+            // autoFocus
           />
         </form>
         {/* // TODO: refactor to info here */}
-        <Temperature temperature={avgTemperature} unit={unit} skyStatus={sky} />
+        <Temperature
+          temperature={avgTemperature}
+          unit={unit}
+          skyStatus={sky}
+          weatherIcon={weatherIcon}
+        />
         <StyledLine />
         <MainDate />
         <SwitchBox
