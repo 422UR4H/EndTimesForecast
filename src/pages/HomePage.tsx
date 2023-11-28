@@ -48,12 +48,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   const [selected, setSelected] = useState<string>("today");
   const [inputCity, setInputCity] = useState<string>("");
   const [cityLatLng, setCityLatLng] = usePersistedState<CityLatLng | undefined>("lat_lng", undefined);
-  const [weatherData, setWeatherData] = useState<WeatherData>({
-    min: 0,
-    max: 0,
-    humidity: 0,
-    windSpeed: 0,
-  });
+  const [weatherData, setWeatherData] = useState<WeatherData | undefined>();
   const [unit, setUnit] = usePersistedState<string>(
     "temperatureUnit",
     "celsius"
