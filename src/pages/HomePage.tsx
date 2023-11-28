@@ -13,6 +13,7 @@ import api from "../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 import CitiesModal from "../components/molecules/CitiesModal";
 import usePersistedState from "../hooks/usePersistedState";
+import utils from "../utils/utils";
 
 type HomePageProps = {
   themeTitle: string;
@@ -20,9 +21,9 @@ type HomePageProps = {
 };
 
 export type CityLatLng = {
-  // city: string;
-  lat: string | number;
-  lng: string | number;
+  city: string;
+  lat: number;
+  lng: number;
 };
 
 export type CityData = {
@@ -62,8 +63,6 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
     api
       .getWeather(cityLatLng.lat, cityLatLng.lng)
       .then((response: AxiosResponse) => {
-        console.log(response);
-
         const { temp, temp_max, temp_min, humidity } = response.data.main;
         const weather: WeatherData = {
           min: temp_min,
@@ -73,7 +72,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         };
         setWeatherData(weather);
         setAvgTemperature(temp);
-        setSky(response.data.weather[0].main)
+        setSky(response.data.weather[0].main);
       })
       .catch((error: AxiosError) => {
         console.log(error);
@@ -110,7 +109,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         const cities: CityData[] = [];
         response.data.results.forEach((city: any) => {
           const { state, state_district, state_code } = city.components;
-          const cityLatLng = { lat: city.geometry.lat, lng: city.geometry.lng };
+          const cityLatLng = { city: utils.toUpperFirstLetter(inputCity), lat: city.geometry.lat, lng: city.geometry.lng };
           cities.push({ state, state_district, state_code, cityLatLng });
         });
         setCitiesData(cities);
@@ -159,7 +158,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
       </div>
       <div className="main">
         <ContainerButtons selected={selected} handleClick={handleClick} />
-        <Locality />
+        <Locality cityLatLng={cityLatLng} />
         <WeatherContent weatherData={weatherData} unit={unit} />
         <p>
           Dados fornecidos pela{" "}

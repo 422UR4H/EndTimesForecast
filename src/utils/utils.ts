@@ -9,6 +9,13 @@ function errorAlert(): void {
   });
 }
 
+function toUpperFirstLetter(name: string) {
+  return name
+    .split(" ")
+    .map((n) => n[0].toUpperCase() + n.substring(1))
+    .join(" ");
+}
+
 function getConvertedTemperature(kelvin: number, unit: string): string {
   if (unit === "celsius") return convertKelvinToCelsius(kelvin);
   return convertKelvinToFahrenheit(kelvin);
@@ -72,6 +79,7 @@ const utils = {
   getConvertedTemperature,
   convertKelvinToCelsius,
   convertKelvinToFahrenheit,
+  toUpperFirstLetter,
   getWeekdayAndHour,
   dateFormat,
 };

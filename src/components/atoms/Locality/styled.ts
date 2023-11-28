@@ -6,5 +6,8 @@ const StyledLocality = styled.div`
     font-size: 7dvw;
     line-height: 7dvw;
   }
+  p {
+    white-space: pre-wrap;
+  }
 `;
 export default StyledLocality;
