@@ -8,7 +8,7 @@ type WeatherProps = {
   unit: string;
 };
 
-export default function WeaterContent({ weatherData, unit }: WeatherProps) {
+export default function WeatherContent({ weatherData, unit }: WeatherProps) {
   return (
     <StyledWeatherContent>
       <div>

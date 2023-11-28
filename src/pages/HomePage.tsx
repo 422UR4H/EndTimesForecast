@@ -5,7 +5,7 @@ import Temperature from "../components/atoms/Temperature";
 import StyledLine from "../styles/Line";
 import SwitchBox from "../components/organisms/SwitchBox";
 import Locality from "../components/atoms/Locality";
-import WeaterContent from "../components/organisms/WeatherContent";
+import WeatherContent from "../components/organisms/WeatherContent";
 import StyledHomePage from "./styled";
 import MainDate from "../components/atoms/MainDate";
 import ContainerButtons from "../components/molecules/ContainerButtons";
@@ -165,7 +165,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
       <div className="main">
         <ContainerButtons selected={selected} handleClick={handleClick} />
         <Locality />
-        <WeaterContent weatherData={weatherData} unit={unit} />
+        <WeatherContent weatherData={weatherData} unit={unit} />
         <p>
           Dados fornecidos pela{" "}
           <a href="https://openweathermap.org/">Open Weather API</a>
