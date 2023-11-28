@@ -28,7 +28,7 @@ export default function Temperature({
   return (
     <StyledTemperature>
       <div>
-        <img src={weatherIcon} alt="Weather Icon" />
+        {weatherIcon !== "" && <img src={weatherIcon} alt="Weather Icon" />}
         <span className="value" style={{ color }}>
           {temp[0]}
         </span>
