@@ -46,6 +46,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [avgTemperature, setAvgTemperature] = useState<number | undefined>();
   const [sky, setSky] = useState<string>("");
+  const [userTimestamp, setUserTimestamp] = useState<number | undefined>();
   const [selected, setSelected] = useState<string>("today");
   const [inputCity, setInputCity] = useState<string>("");
   const [cityLatLng, setCityLatLng] = usePersistedState<CityLatLng | undefined>(
@@ -67,7 +68,10 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
     if (cityLatLng == undefined) {
       navigator.geolocation.getCurrentPosition(
         (location: GeolocationPosition) => {
-          const { latitude: lat, longitude: lng } = location.coords;
+          const {timestamp, coords} = location;
+          const { latitude: lat, longitude: lng } = coords;
+
+          setUserTimestamp(timestamp);
           api
             .getWeatherGeo(lat, lng)
             .then((response) => {
@@ -182,7 +186,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
           weatherIcon={weatherIcon}
         />
         <StyledLine />
-        <MainDate />
+        <MainDate userTimestamp={userTimestamp} />
         <SwitchBox
           theme={themeTitle}
           toggleTheme={toggleTheme}
