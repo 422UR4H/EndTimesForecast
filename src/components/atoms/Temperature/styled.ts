@@ -5,23 +5,16 @@ const StyledTemperature = styled.div`
   height: 184px;
 
   div {
+    font-size: 150px;
+    font-weight: 300;
     display: flex;
 
-    .value {
-      font-weight: 300;
-      font-size: 150px;
-
-      height: 142px;
-      margin-top: 24px;
-    }
-    .unit {
-      font-weight: 300;
+    sup {
       font-size: 120px;
     }
     img {
       width: 150px;
       height: 150px;
-      margin-top: -24px;
     }
   }
   p {
