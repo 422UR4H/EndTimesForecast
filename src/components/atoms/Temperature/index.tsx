@@ -19,7 +19,6 @@ export default function Temperature({
   skyStatus,
   weatherIcon,
 }: TemperatureProps) {
-  console.log(weatherIcon)
   const { sky, color } = formatSkyAndColor(skyStatus);
   const temp: string[] = utils
     .getConvertedTemperature(Number(temperature), unit)
