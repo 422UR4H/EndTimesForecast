@@ -1,3 +1,4 @@
+import { RiSearch2Line } from "react-icons/ri";
 import StyledMainInput from "../styles/MainInput";
 import { useEffect, useRef, useState } from "react";
 import Header from "../components/molecules/Header";
@@ -14,6 +15,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import CitiesModal from "../components/molecules/CitiesModal";
 import usePersistedState from "../hooks/usePersistedState";
 import utils from "../utils/utils";
+import StyledSearchForm from "../styles/SearchForm";
 
 type HomePageProps = {
   themeTitle: string;
@@ -170,7 +172,8 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
 
       <div className="sidebar">
         <Header />
-        <form onSubmit={handleSubmit}>
+        <StyledSearchForm onSubmit={handleSubmit}>
+          <RiSearch2Line className="icon" />
           <StyledMainInput
             ref={inputRef}
             name="inputCity"
@@ -179,7 +182,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
             value={inputCity}
             onChange={handleInput}
           />
-        </form>
+        </StyledSearchForm>
         {/* // TODO: refactor to info here */}
         <Temperature
           temperature={avgTemperature}
