@@ -12,14 +12,15 @@ function getWeather(lat: number | string, lon: number | string) {
   return axios.get(`${URL}lat=${lat}&lon=${lon}&appid=${KEY}`);
 }
 
-function getWeatherIcon(icon: string) {
-  const URL = "https://openweathermap.org/img/wn/";
-  return axios.get(`${URL}${icon}@2x.png`);
+function getWeatherGeo(lat: number | string, lon: number | string) {
+  const URL = "https://api.openweathermap.org/geo/1.0/reverse?";
+  const KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
+  return axios.get(`${URL}lat=${lat}&lon=${lon}&appid=${KEY}`); // limit=5
 }
 
 const api = {
   getWeather,
   getGeocoding,
-  getWeatherIcon,
+  getWeatherGeo,
 };
 export default api;

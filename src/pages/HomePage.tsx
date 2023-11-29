@@ -63,6 +63,22 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   useEffect(() => {
     const input = inputRef.current;
     if (input != null) input.focus();
+
+    if (cityLatLng == undefined) {
+      navigator.geolocation.getCurrentPosition(
+        (location: GeolocationPosition) => {
+          const { latitude: lat, longitude: lng } = location.coords;
+          api
+            .getWeatherGeo(lat, lng)
+            .then((response) => {
+              setCityLatLng({ lat, lng, city: response.data[0].name });
+            })
+            .catch((error: GeolocationPositionError) => {
+              console.log(error);
+            });
+        }
+      );
+    }
   }, []);
 
   useEffect(() => {
@@ -121,7 +137,8 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         response.data.results.forEach((city: any) => {
           const { state, state_district, state_code } = city.components;
           const cityLatLng = {
-            city: utils.toUpperFirstLetter(inputCity),
+            // city: utils.toUpperFirstLetter(inputCity),
+            city: utils.getCityName(city.formatted),
             lat: city.geometry.lat,
             lng: city.geometry.lng,
           };
