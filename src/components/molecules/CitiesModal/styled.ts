@@ -23,15 +23,6 @@ const StyledModal = styled.div`
     h1 {
       text-align: center;
     }
-    &::-webkit-scrollbar {
-			width: 16px;
-      border-radius: 8px;
-      background-color: ${({ theme }) => theme.colors.primaryBackground};
-		}
-		&::-webkit-scrollbar-thumb {
-      background-color: ${({ theme }) => theme.colors.primary};
-			border-radius: 8px;
-		}
   }
 `;
 export default StyledModal;
