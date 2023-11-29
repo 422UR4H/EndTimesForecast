@@ -8,7 +8,7 @@ import Locality from "../components/atoms/Locality";
 import WeatherContent from "../components/organisms/WeatherContent";
 import StyledHomePage from "./styled";
 import MainDate from "../components/atoms/MainDate";
-import ContainerButtons from "../components/molecules/ContainerButtons";
+import NavBar from "../components/molecules/NavBar";
 import api from "../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 import CitiesModal from "../components/molecules/CitiesModal";
@@ -198,7 +198,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         <p>Todos os direitos reservados. 2023.</p>
       </div>
       <div className="main">
-        <ContainerButtons selected={selected} handleClick={handleClick} />
+        <NavBar selected={selected} handleClick={handleClick} />
         <Locality cityLatLng={cityLatLng} />
         <WeatherContent weatherData={weatherData} unit={unit} />
         <p>

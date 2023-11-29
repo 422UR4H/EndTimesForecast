@@ -1,14 +1,14 @@
 import TransparentButton from "../../atoms/TransparentButton";
-import StyledContainerButtons from "./styled";
+import StyledNavBar from "./styled";
 
-type ContainetButtonsProps = {
+type NavBarProps = {
   selected: string;
   handleClick(e: any): void;
 }
 
-export default function ContainerButtons({ selected, handleClick }: ContainetButtonsProps) {
+export default function NavBar({ selected, handleClick }: NavBarProps) {
   return (
-    <StyledContainerButtons>
+    <StyledNavBar>
       <TransparentButton
         onClick={handleClick}
         isSelected={selected === "today"}
@@ -21,6 +21,6 @@ export default function ContainerButtons({ selected, handleClick }: ContainetBut
       >
         Próximos dias
       </TransparentButton>
-    </StyledContainerButtons>
+    </StyledNavBar>
   );
 }
