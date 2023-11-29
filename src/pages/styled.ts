@@ -29,5 +29,20 @@ const StyledHomePage = styled.div`
     text-decoration: none;
     color: ${({ theme }) => theme.colors.link};
   }
+
+  @media (max-width: 1325px) {
+    flex-direction: column;
+    
+    .sidebar {
+      width: 100%;
+      min-height: 820px;
+    }
+    .main {
+      width: 100%;
+      min-height: 96dvh;
+      padding-inline: 50px;
+      
+    }
+  }
 `;
 export default StyledHomePage;

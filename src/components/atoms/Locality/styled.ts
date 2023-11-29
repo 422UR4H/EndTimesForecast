@@ -9,5 +9,12 @@ const StyledLocality = styled.div`
   p {
     white-space: pre-wrap;
   }
+
+  @media (max-width: 1325px) {
+    h1{
+      margin-block: 10px;
+    }
+    margin-bottom: 10px;
+  }
 `;
 export default StyledLocality;

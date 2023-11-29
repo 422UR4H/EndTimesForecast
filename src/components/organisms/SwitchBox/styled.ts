@@ -5,5 +5,10 @@ const StyledSwitchBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  @media (max-width: 1325px) {
+    flex-direction: row;
+    gap: 25px;
+  }
 `
 export default StyledSwitchBox;
