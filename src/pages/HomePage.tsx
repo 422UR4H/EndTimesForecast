@@ -137,8 +137,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         response.data.results.forEach((city: any) => {
           const { state, state_district, state_code } = city.components;
           const cityLatLng = {
-            // city: utils.toUpperFirstLetter(inputCity),
-            city: utils.getCityName(city.formatted),
+            city: utils.toUpperFirstLetter(inputCity),
             lat: city.geometry.lat,
             lng: city.geometry.lng,
           };
