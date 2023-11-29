@@ -20,7 +20,7 @@ export default function Temperature({
   weatherIcon,
 }: TemperatureProps) {
   const { sky, color } = formatSkyAndColor(skyStatus);
-  const temp: string[] = utils
+  const [value, unitChar]: string[] = utils
     .getConvertedTemperature(Number(temperature), unit)
     .split("°");
 
@@ -28,11 +28,9 @@ export default function Temperature({
     <StyledTemperature>
       <div>
         {weatherIcon !== "" && <img src={weatherIcon} alt="Weather Icon" />}
-        <span className="value" style={{ color }}>
-          {temp[0]}
-        </span>
-        <span className="unit" style={{ color }}>
-          °{temp[1]}
+        <span style={{ color }}>
+          {value}
+          <sup>°{unitChar}</sup>
         </span>
       </div>
       <p>{sky}</p>
@@ -56,8 +54,7 @@ function formatSkyAndColor(sky: string): SkyAndColor {
       return { sky: "Chuviscando", color: "#06BCC1" };
     case "Mist":
       return { sky: "Neblina", color: "#D8D8D8" };
-    case "":
+    default:
       return { sky: "Céu indefinido", color: "#EC6E4C" };
   }
-  return { sky: "Error", color: "red" };
 }
