@@ -4,7 +4,7 @@ const StyledLocality = styled.div`
   h1 {
     font-weight: 400;
     font-size: 7dvw;
-    line-height: 7dvw;
+    line-height: 8dvw;
   }
   p {
     white-space: pre-wrap;
