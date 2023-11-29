@@ -54,7 +54,9 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
     undefined
   );
   const [weatherData, setWeatherData] = useState<WeatherData | undefined>();
-  const [weatherIcon, setWeatherIcon] = useState<string>("");
+  const [weatherIcon, setWeatherIcon] = useState<string>(
+    "https://openweathermap.org/img/wn/01d@2x.png"
+  );
   const [unit, setUnit] = usePersistedState<string>(
     "temperatureUnit",
     "celsius"
@@ -68,7 +70,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
     if (cityLatLng == undefined) {
       navigator.geolocation.getCurrentPosition(
         (location: GeolocationPosition) => {
-          const {timestamp, coords} = location;
+          const { timestamp, coords } = location;
           const { latitude: lat, longitude: lng } = coords;
 
           setUserTimestamp(timestamp);
