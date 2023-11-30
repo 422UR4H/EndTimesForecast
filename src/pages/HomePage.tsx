@@ -88,8 +88,9 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
             .then((response) => {
               setCityLatLng({ lat, lng, city: response.data[0].name });
             })
-            .catch((error: GeolocationPositionError) => {
+            .catch((error: AxiosError) => {
               console.log(error);
+              utils.errorAlert();
             });
         }
       );
@@ -119,7 +120,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
       })
       .catch((error: AxiosError) => {
         console.log(error);
-        // utils.errorAlert();
+        utils.errorAlert();
       });
 
     api
@@ -137,7 +138,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
       })
       .catch((error: AxiosError) => {
         console.log(error);
-        // utils.errorAlert();
+        utils.errorAlert();
       });
   }, [cityLatLng]);
 
@@ -181,7 +182,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
       })
       .catch((error: AxiosError) => {
         console.log(error);
-        // TODO: message to user
+        utils.errorAlert();
       });
   }
 
