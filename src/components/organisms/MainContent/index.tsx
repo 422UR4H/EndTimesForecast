@@ -7,6 +7,7 @@ import { CityLatLng } from "../../../pages/HomePage";
 import api from "../../../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 import utils from "../../../utils/utils";
+import StyledMainContent from "./styled";
 
 type MainContentProps = {
   cityLatLng: CityLatLng | undefined;
@@ -96,7 +97,7 @@ export default function MainContent({
   }
 
   return (
-    <div className="main">
+    <StyledMainContent>
       <NavBar selected={selected} handleClick={handleClick} />
       <Locality cityLatLng={cityLatLng} />
       {selected === "today" ? (
@@ -108,7 +109,7 @@ export default function MainContent({
         Dados fornecidos pela{" "}
         <a href="https://openweathermap.org/">Open Weather API</a>
       </p>
-    </div>
+    </StyledMainContent>
   );
 }
 
