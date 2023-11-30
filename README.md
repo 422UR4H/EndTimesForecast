@@ -35,6 +35,14 @@ Finally, to start application, run:
 npm run dev
 ```
 
+## APIs used
+
+### Open Weather API Link: https://openweathermap.org/api
+
+### Open Cage Geocoding API Link: https://opencagedata.com/api
+
+<br />
+
 ## Technologies used
 
 For this project, I used:
