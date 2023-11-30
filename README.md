@@ -1,30 +1,50 @@
-# React + TypeScript + Vite
+# End Times Forecast
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Front-end web application for checking current and forecast weather.
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is part of the technical challenge "Levo um casaquinho?", developed to provide updated information about the current temperature, the weather forecast for the next few days and also give an opinion on whether or not you should take a cardigan if you are going out 😅. Using modern technologies, this application offers an intuitive and friendly interface for users to view meteorological data from different locations (with a focus on Brazil).
 
-## Expanding the ESLint configuration
+## Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Deploy Front-end Link: https://end-times-forecast.vercel.app
 
-- Configure the top-level `parserOptions` property like this:
+<br />
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Quick start
+
+Clone this repository following the list of commands to install the dependencies.
+
+```bash
+git clone https://github.com/422UR4H/EndTimesForecast
+cd EndTimesForecast
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Create a .env file following the .env.example to connect to APIs.
+
+```bash
+VITE_GEOCODING_API_KEY=# your key here
+VITE_OPEN_WEATHER_API_KEY=# your key here
+```
+
+Finally, to start application, run:
+
+```bash
+npm run dev
+```
+
+# Technologies used
+
+For this project, I used:
+
+- React (version 18.2.0);
+- Vite (version 5.0.0);
+- TypeScript;
+- Styled-components;
+- Recharts;
+- React Icons;
+- React Switch;
+- Sweetalert2;
+- Axios;
