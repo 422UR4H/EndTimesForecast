@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Header from "../components/molecules/Header";
 import Temperature from "../components/atoms/Temperature";
 import StyledLine from "../styles/Line";
-import SwitchBox from "../components/organisms/SwitchBox";
+import SwitchBox from "../components/molecules/SwitchBox";
 import Locality from "../components/atoms/Locality";
 import WeatherContent from "../components/organisms/WeatherContent";
 import StyledHomePage from "./styled";

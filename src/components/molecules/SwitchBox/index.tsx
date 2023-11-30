@@ -1,4 +1,4 @@
-import SwitchWrapper from "../../molecules/SwitchWrapper";
+import SwitchWrapper from "../SwitchWrapper";
 import StyledSwitchBox from "./styled";
 
 type SwitchBoxProps = {
