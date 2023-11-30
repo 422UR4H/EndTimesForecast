@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledTemperature = styled.div`
+const StyledTemperature = styled.div<{ $color: string }>`
   color: ${({ theme }) => theme.colors.secondary};
   height: 184px;
 
@@ -15,6 +15,7 @@ const StyledTemperature = styled.div`
     img {
       width: 150px;
       height: 150px;
+      filter: drop-shadow(0 0 1rem ${({ $color }) => $color});
     }
   }
   p {

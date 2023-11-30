@@ -25,7 +25,7 @@ export default function Temperature({
     .split("°");
 
   return (
-    <StyledTemperature>
+    <StyledTemperature $color={color}>
       <div>
         {weatherIcon !== "" && <img src={weatherIcon} alt="Weather Icon" />}
         <span style={{ color }}>
