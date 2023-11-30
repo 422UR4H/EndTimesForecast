@@ -35,6 +35,8 @@ Finally, to start application, run:
 npm run dev
 ```
 
+<br />
+
 ## APIs used
 
 ### Open Weather API Link: https://openweathermap.org/api
