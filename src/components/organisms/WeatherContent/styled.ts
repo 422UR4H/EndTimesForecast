@@ -10,9 +10,7 @@ const StyledWeatherContent = styled.div`
 
     display: grid;
     grid-template-columns: auto auto;
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    /* gap: 100px; */
+    grid-auto-columns: auto auto;
     column-gap: calc(10% - 10px);
     row-gap: 12.2%;
   }

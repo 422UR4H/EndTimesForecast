@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 const StyledWeatherBox = styled.div`
   max-width: 500px;
-  /* height: 180px; */
-  /* min-height: 100px; */
+  width: 500px;
   border-radius: 32px;
   padding-block: 50px;
   padding-inline: 45px;
@@ -26,6 +25,10 @@ const StyledWeatherBox = styled.div`
     font-size: 48px;
     font-weight: 600;
     line-height: 36px;
+  }
+
+  @media (max-width: 1912px) {
+    width: 100%;
   }
 `;
 export default StyledWeatherBox;
