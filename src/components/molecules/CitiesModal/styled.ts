@@ -5,7 +5,7 @@ const StyledModal = styled.div`
     max-height: 90dvh;
     padding: 30px;
     border-radius: 20px;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
