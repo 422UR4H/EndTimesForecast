@@ -5,18 +5,15 @@ import Header from "../components/molecules/Header";
 import Temperature from "../components/atoms/Temperature";
 import StyledLine from "../styles/Line";
 import SwitchBox from "../components/molecules/SwitchBox";
-import Locality from "../components/atoms/Locality";
-import WeatherContent from "../components/organisms/WeatherContent";
 import StyledHomePage from "./styled";
 import MainDate from "../components/atoms/MainDate";
-import NavBar from "../components/molecules/NavBar";
 import api from "../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 import CitiesModal from "../components/molecules/CitiesModal";
 import usePersistedState from "../hooks/usePersistedState";
 import utils from "../utils/utils";
 import StyledSearchForm from "../styles/SearchForm";
-import ForecastChart from "../components/molecules/ForecastChart";
+import MainContent from "../components/organisms/MainContent";
 
 type HomePageProps = {
   themeTitle: string;
@@ -36,33 +33,18 @@ export type CityData = {
   cityLatLng: CityLatLng;
 };
 
-export type WeatherData = {
-  min: number;
-  max: number;
-  humidity: number;
-  windSpeed: number;
-};
-
-export type ForecastData = {
-  timestamp: number;
-  avgTemperature: number;
-};
-
 export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   // TODO: type this
-  const [forecastData, setForecastData] = useState<ForecastData[]>();
   const [citiesData, setCitiesData] = useState<CityData[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [avgTemperature, setAvgTemperature] = useState<number | undefined>();
   const [sky, setSky] = useState<string>("");
   const [userTimestamp, setUserTimestamp] = useState<number | undefined>();
-  const [selected, setSelected] = useState<string>("today");
   const [inputCity, setInputCity] = useState<string>("");
   const [cityLatLng, setCityLatLng] = usePersistedState<CityLatLng | undefined>(
     "lat_lng",
     undefined
   );
-  const [weatherData, setWeatherData] = useState<WeatherData | undefined>();
   const [weatherIcon, setWeatherIcon] = useState<string>(
     "https://openweathermap.org/img/wn/01d@2x.png"
   );
@@ -97,64 +79,8 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
     }
   }, []);
 
-  useEffect(() => {
-    if (cityLatLng?.lat == undefined || cityLatLng?.lng == undefined) {
-      return;
-    }
-    api
-      .getWeather(cityLatLng.lat, cityLatLng.lng)
-      .then((response: AxiosResponse) => {
-        const { main, icon } = response.data.weather[0];
-        setSky(main);
-        setWeatherIcon("https://openweathermap.org/img/wn/" + icon + "@2x.png");
-
-        const { temp, temp_max, temp_min, humidity } = response.data.main;
-        const weather: WeatherData = {
-          min: temp_min,
-          max: temp_max,
-          humidity,
-          windSpeed: response.data.wind.speed,
-        };
-        setWeatherData(weather);
-        setAvgTemperature(temp);
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-        utils.errorAlert();
-      });
-
-    api
-      .getWeatherForecast(cityLatLng.lat, cityLatLng.lng)
-      .then((response: AxiosResponse) => {
-        const forecastListData: ForecastData[] = [];
-
-        response.data.list.map((l: any) => {
-          const timestamp = new Date(l.dt_txt).getTime();
-          const data = { timestamp, avgTemperature: l.main.temp };
-          forecastListData.push(data);
-        });
-        // forecastListData?.sort((a, b) => a.timestamp - b.timestamp);
-        setForecastData(forecastListData);
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-        utils.errorAlert();
-      });
-  }, [cityLatLng]);
-
   function toggleUnit() {
     setUnit(unit === "celsius" ? "fahrenheit" : "celsius");
-  }
-
-  // TODO: type and improve this
-  function handleClick(e: any) {
-    const { innerHTML } = e.target;
-
-    if (isTodayClicked(innerHTML) && !isTodaySelected(selected)) {
-      setSelected("today");
-    } else if (!isTodayClicked(innerHTML) && isTodaySelected(selected)) {
-      setSelected("nextDays");
-    }
   }
 
   // TODO: type this
@@ -186,6 +112,12 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
     const description = state_district || municipality || cityName;
 
     return { state, description, state_code, cityLatLng };
+  }
+
+  function setTemperatureData(sky: string, icon: string, temp: number) {
+    setSky(sky);
+    setWeatherIcon("https://openweathermap.org/img/wn/" + icon + "@2x.png");
+    setAvgTemperature(temp);
   }
 
   return (
@@ -228,27 +160,11 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         />
         <p>Todos os direitos reservados. 2023.</p>
       </div>
-      <div className="main">
-        <NavBar selected={selected} handleClick={handleClick} />
-        <Locality cityLatLng={cityLatLng} />
-        {selected === "today" ? (
-          <WeatherContent weatherData={weatherData} unit={unit} />
-        ) : (
-          <ForecastChart forecastData={forecastData} unit={unit} />
-        )}
-        <p>
-          Dados fornecidos pela{" "}
-          <a href="https://openweathermap.org/">Open Weather API</a>
-        </p>
-      </div>
+      <MainContent
+        cityLatLng={cityLatLng}
+        setTemperatureData={setTemperatureData}
+        unit={unit}
+      />
     </StyledHomePage>
   );
-}
-
-function isTodayClicked(innerHtml: string): boolean {
-  return innerHtml === "Hoje";
-}
-
-function isTodaySelected(selected: string): boolean {
-  return selected === "today";
 }

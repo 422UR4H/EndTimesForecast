@@ -8,8 +8,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ForecastData } from "../../../pages/HomePage";
 import utils from "../../../utils/utils";
+import { ForecastData } from "../../organisms/MainContent";
 
 type ForecastChartProps = {
   forecastData: ForecastData[] | undefined;

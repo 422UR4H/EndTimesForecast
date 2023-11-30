@@ -1,7 +1,8 @@
-import { WeatherData } from "../../../pages/HomePage";
 import WeatherBox from "../../atoms/WeatherBox";
 import StyledWeatherContent from "./styled";
 import utils from "../../../utils/utils";
+import { WeatherData } from "../MainContent";
+import CasaquinhoMessage from "../../atoms/CasaquinhoMessage";
 
 type WeatherProps = {
   weatherData: WeatherData | undefined;
@@ -20,14 +21,16 @@ export default function WeatherContent({ weatherData, unit }: WeatherProps) {
           title="Máxima"
           value={utils.getConvertedTemperature(Number(weatherData?.max), unit)}
         />
-        <WeatherBox title="Umidade" value={(weatherData?.humidity || 0) + "%"} />
-        <WeatherBox title="Velocidade do vento" value={weatherData?.windSpeed || 0} />
+        <WeatherBox
+          title="Umidade"
+          value={(weatherData?.humidity || 0) + "%"}
+        />
+        <WeatherBox
+          title="Velocidade do vento"
+          value={weatherData?.windSpeed || 0}
+        />
       </div>
-      <p>
-        {(weatherData?.min || 0) < 290.15
-          ? `Não esqueça de levar o casaquinho!`
-          : `Não, você não deve levar um casaquinho!`}
-      </p>
+      <CasaquinhoMessage minTemp={weatherData?.min}/>
     </StyledWeatherContent>
   );
 }

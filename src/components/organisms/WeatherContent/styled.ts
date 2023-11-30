@@ -16,11 +16,5 @@ const StyledWeatherContent = styled.div`
     column-gap: calc(10% - 10px);
     row-gap: 12.2%;
   }
-
-  & > p {
-    padding-top: 61px;
-    font-style: italic;
-    color: ${({ theme }) => theme.colors.ternaryText};
-  }
 `;
 export default StyledWeatherContent;
