@@ -35,7 +35,7 @@ Finally, to start application, run:
 npm run dev
 ```
 
-# Technologies used
+## Technologies used
 
 For this project, I used:
 
