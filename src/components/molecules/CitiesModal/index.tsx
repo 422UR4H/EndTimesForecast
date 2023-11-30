@@ -30,7 +30,7 @@ export default function CitiesModal({
               {i + 1}: {cityData.state}
             </h2>
             <p>
-              {cityData.state_district}, {cityData.state_code}
+              {cityData.description}, {cityData.state_code}
             </p>
           </MainButton>
         ))}

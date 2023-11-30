@@ -31,7 +31,7 @@ export type CityLatLng = {
 
 export type CityData = {
   state: string;
-  state_district: string;
+  description: string;
   state_code: string;
   cityLatLng: CityLatLng;
 };
@@ -129,7 +129,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         const forecastListData: ForecastData[] = [];
 
         response.data.list.map((l: any) => {
-          const timestamp = (new Date(l.dt_txt)).getTime();
+          const timestamp = new Date(l.dt_txt).getTime();
           const data = { timestamp, avgTemperature: l.main.temp };
           forecastListData.push(data);
         });
@@ -167,16 +167,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
     api
       .getGeocoding(inputCity)
       .then((response: AxiosResponse) => {
-        const cities: CityData[] = [];
-        response.data.results.forEach((city: any) => {
-          const { state, state_district, state_code } = city.components;
-          const cityLatLng = {
-            city: utils.toUpperFirstLetter(inputCity),
-            lat: city.geometry.lat,
-            lng: city.geometry.lng,
-          };
-          cities.push({ state, state_district, state_code, cityLatLng });
-        });
+        const cities: CityData[] = response.data.results.map(getCityData);
         setCitiesData(cities);
         setShowModal(true);
       })
@@ -184,6 +175,17 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         console.log(error);
         utils.errorAlert();
       });
+  }
+
+  function getCityData(city: any) {
+    const { lat, lng } = city.geometry;
+    const { state, state_district, municipality, state_code } = city.components;
+
+    const cityName = utils.toUpperFirstLetter(inputCity);
+    const cityLatLng = { city: cityName, lat, lng };
+    const description = state_district || municipality || cityName;
+
+    return { state, description, state_code, cityLatLng };
   }
 
   return (
