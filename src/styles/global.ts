@@ -7,13 +7,14 @@ export default createGlobalStyle`
     box-sizing: border-box;
 
     &::-webkit-scrollbar {
+      box-sizing: padding-box;
 			width: 16px;
-      border-radius: 8px;
+      border-radius: 0 16px 16px 0;
       background-color: ${({ theme }) => theme.colors.primaryBackground};
       border: 3px solid ${({ theme }) => theme.colors.primary};
 		}
 		&::-webkit-scrollbar-thumb {
-			border-radius: 8px;
+			border-radius: 0 16px 16px 0;
       background-color: ${({ theme }) => theme.colors.primary};
 		}
     &::-webkit-scrollbar-corner {
