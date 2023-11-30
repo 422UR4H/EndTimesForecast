@@ -36,37 +36,46 @@ function dateFormat(date: string | Date, joinChar = "-") {
   return date.split("T")[0].split("-").reverse().join(joinChar);
 }
 
+function getDateAndWeekday(date: number | Date, joinChar = "-") {
+  if (typeof date === "number") date = new Date(date);
+
+  const splittedDate = dateFormat(date.toISOString(), joinChar).split(joinChar);
+  const newDate = [splittedDate[0], splittedDate[1]].join(joinChar);
+
+  const weekday = formatWeekday(date.toString().split(" ")[0])
+    .slice(0, 3)
+    .toLowerCase();
+
+  return newDate + " (" + weekday + ")";
+}
+
 function getWeekdayAndHour(date: string | Date) {
   if (typeof date !== "string") date = date.toString();
 
   const day = date.split(" ");
-  let weekday: string;
-  switch (day[0]) {
-    case "Mon":
-      weekday = "Segunda-feira";
-      break;
-    case "Tue":
-      weekday = "Terça-feira";
-      break;
-    case "Wed":
-      weekday = "Quarta-feira";
-      break;
-    case "Thu":
-      weekday = "Quinta-feira";
-      break;
-    case "Fri":
-      weekday = "Sexta-feira";
-      break;
-    case "Sat":
-      weekday = "Sábado";
-      break;
-    case "Sun":
-      weekday = "Domingo";
-      break;
-    default:
-      weekday = "Um belo dia";
-  }
+  const weekday = formatWeekday(day[0]);
   return weekday + ", " + formatHour(day[4]);
+}
+
+function formatWeekday(day: string) {
+  switch (day) {
+    case "Mon":
+      return "Segunda-feira";
+    case "Tue":
+      return "Terça-feira";
+    case "Wed":
+      return "Quarta-feira";
+    case "Thu":
+      return "Quinta-feira";
+    case "Fri":
+      return "Sexta-feira";
+    case "Sat":
+      return "Sábado";
+    case "Sun":
+      return "Domingo";
+    default:
+      return "Um belo dia";
+  }
 }
 
 function formatHour(hour: string, char = ":"): string {
@@ -81,6 +90,7 @@ const utils = {
   convertKelvinToFahrenheit,
   toUpperFirstLetter,
   getWeekdayAndHour,
+  getDateAndWeekday,
   dateFormat,
 };
 export default utils;

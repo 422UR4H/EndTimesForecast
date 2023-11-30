@@ -16,6 +16,7 @@ import CitiesModal from "../components/molecules/CitiesModal";
 import usePersistedState from "../hooks/usePersistedState";
 import utils from "../utils/utils";
 import StyledSearchForm from "../styles/SearchForm";
+import ForecastChart from "../components/molecules/ForecastChart";
 
 type HomePageProps = {
   themeTitle: string;
@@ -42,8 +43,14 @@ export type WeatherData = {
   windSpeed: number;
 };
 
+export type ForecastData = {
+  timestamp: number;
+  avgTemperature: number;
+};
+
 export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   // TODO: type this
+  const [forecastData, setForecastData] = useState<ForecastData[]>();
   const [citiesData, setCitiesData] = useState<CityData[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [avgTemperature, setAvgTemperature] = useState<number | undefined>();
@@ -109,6 +116,24 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
         };
         setWeatherData(weather);
         setAvgTemperature(temp);
+      })
+      .catch((error: AxiosError) => {
+        console.log(error);
+        // utils.errorAlert();
+      });
+
+    api
+      .getWeatherForecast(cityLatLng.lat, cityLatLng.lng)
+      .then((response: AxiosResponse) => {
+        const forecastListData: ForecastData[] = [];
+
+        response.data.list.map((l: any) => {
+          const timestamp = (new Date(l.dt_txt)).getTime();
+          const data = { timestamp, avgTemperature: l.main.temp };
+          forecastListData.push(data);
+        });
+        // forecastListData?.sort((a, b) => a.timestamp - b.timestamp);
+        setForecastData(forecastListData);
       })
       .catch((error: AxiosError) => {
         console.log(error);
@@ -203,7 +228,11 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
       <div className="main">
         <NavBar selected={selected} handleClick={handleClick} />
         <Locality cityLatLng={cityLatLng} />
-        <WeatherContent weatherData={weatherData} unit={unit} />
+        {selected === "today" ? (
+          <WeatherContent weatherData={weatherData} unit={unit} />
+        ) : (
+          <ForecastChart forecastData={forecastData} unit={unit} />
+        )}
         <p>
           Dados fornecidos pela{" "}
           <a href="https://openweathermap.org/">Open Weather API</a>
