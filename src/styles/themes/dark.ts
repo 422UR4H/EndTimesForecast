@@ -9,7 +9,8 @@ export default {
     secondaryBackground: "#211f1c",
 
     primaryText: "#F5F5F5",
-    secondaryText: "#06bcc1",
+    // secondaryText: "#06bcc1",
+    secondaryText: "#bf1a2f",
     ternaryText: "#AFADAD",
 
     link: "#96A7F2",
