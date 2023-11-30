@@ -1,10 +1,11 @@
+import { Theme, Unit } from "../../../utils/enums";
 import SwitchWrapper from "../SwitchWrapper";
 import StyledSwitchBox from "./styled";
 
 type SwitchBoxProps = {
-  theme: string;
+  theme: Theme;
   toggleTheme(): void;
-  unit: string;
+  unit: Unit;
   toggleUnit(): void;
 };
 
@@ -16,10 +17,10 @@ export default function SwitchBox({
 }: SwitchBoxProps) {
   return (
     <StyledSwitchBox>
-      <SwitchWrapper checked={unit === "fahrenheit"} toggle={toggleUnit}>
+      <SwitchWrapper checked={unit === Unit.Fahrenheit} toggle={toggleUnit}>
         °F
       </SwitchWrapper>
-      <SwitchWrapper checked={theme === "dark"} toggle={toggleTheme}>
+      <SwitchWrapper checked={theme === Theme.Dark} toggle={toggleTheme}>
         Dark Mode
       </SwitchWrapper>
     </StyledSwitchBox>

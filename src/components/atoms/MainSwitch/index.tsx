@@ -16,7 +16,7 @@ export default function MainSwitch({ checked, toggle }: MainSwitchProps) {
       width={51}
       borderRadius={16}
       offColor={"#D8D8D8"}
-      onColor={'#4D4494'} // or EC6E4C
+      onColor={"#4D4494"} // or EC6E4C
       // onColor={themeContext?.colors.secondary || '#000000'}
     />
   );

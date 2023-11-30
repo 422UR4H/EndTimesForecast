@@ -5,7 +5,10 @@ export default function Header() {
   return (
     <StyledHeader>
       <img src={coat} alt="coat" />
-      <h1>Levo um<br /> casaquinho?</h1>
+      <h1>
+        Levo um
+        <br /> casaquinho?
+      </h1>
     </StyledHeader>
   );
 }

@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import { Unit } from "./enums";
 
 function errorAlert(): void {
   Swal.fire({
@@ -16,14 +17,14 @@ function toUpperFirstLetter(name: string) {
     .join(" ");
 }
 
-function getConvertedKelvin(kelvin: number, unit: string): number {
-  if (unit === "celsius") return convertKelvinToCelsius(kelvin);
+function getConvertedKelvin(kelvin: number, unit: Unit): number {
+  if (unit === Unit.Celsius) return convertKelvinToCelsius(kelvin);
   return convertKelvinToFahrenheit(kelvin);
 }
 
-function getConvertedTemperature(kelvin: number, unit: string): string {
+function getConvertedTemperature(kelvin: number, unit: Unit): string {
   let convertedTemperature: number;
-  if (unit === "celsius") {
+  if (unit === Unit.Celsius) {
     convertedTemperature = convertKelvinToCelsius(kelvin);
   } else {
     convertedTemperature = convertKelvinToFahrenheit(kelvin);
@@ -39,8 +40,8 @@ function convertKelvinToFahrenheit(kelvin: number): number {
   return isNaN(kelvin) ? 0 : ((kelvin - 273.15) * 9) / 5 + 32;
 }
 
-function getUnit(unit: string) {
-  return unit === "celsius" ? "°C" : "°F";
+function getUnit(unit: Unit) {
+  return unit === Unit.Celsius ? "°C" : "°F";
 }
 
 function dateFormat(date: string | Date, joinChar = "-") {

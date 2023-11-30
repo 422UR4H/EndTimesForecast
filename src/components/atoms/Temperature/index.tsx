@@ -1,9 +1,10 @@
+import { Unit } from "../../../utils/enums";
 import utils from "../../../utils/utils";
 import StyledTemperature from "./styled";
 
 type TemperatureProps = {
   temperature: number | undefined;
-  unit: string;
+  unit: Unit;
   skyStatus: string;
   weatherIcon: string;
 };

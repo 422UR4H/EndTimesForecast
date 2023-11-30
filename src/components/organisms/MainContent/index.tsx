@@ -8,11 +8,13 @@ import api from "../../../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 import utils from "../../../utils/utils";
 import StyledMainContent from "./styled";
+import { Nav, Unit } from "../../../utils/enums";
+import { OPEN_WEATHER_URL } from "../../../utils/constants";
 
 type MainContentProps = {
   cityLatLng: CityLatLng | undefined;
   setTemperatureData(sky: string, icon: string, temp: number): void;
-  unit: string;
+  unit: Unit;
 };
 
 export type ForecastData = {
@@ -34,7 +36,7 @@ export default function MainContent({
 }: MainContentProps) {
   const [weatherData, setWeatherData] = useState<WeatherData | undefined>();
   const [forecastData, setForecastData] = useState<ForecastData[]>();
-  const [selected, setSelected] = useState<string>("today");
+  const [selected, setSelected] = useState<Nav>(Nav.Today);
 
   useEffect(() => {
     if (cityLatLng?.lat == undefined || cityLatLng?.lng == undefined) {
@@ -90,9 +92,9 @@ export default function MainContent({
     const { innerHTML } = e.target;
 
     if (isTodayClicked(innerHTML) && !isTodaySelected(selected)) {
-      setSelected("today");
+      setSelected(Nav.Today);
     } else if (!isTodayClicked(innerHTML) && isTodaySelected(selected)) {
-      setSelected("nextDays");
+      setSelected(Nav.NextDays);
     }
   }
 
@@ -100,14 +102,13 @@ export default function MainContent({
     <StyledMainContent>
       <NavBar selected={selected} handleClick={handleClick} />
       <Locality cityLatLng={cityLatLng} />
-      {selected === "today" ? (
+      {selected === Nav.Today ? (
         <WeatherContent weatherData={weatherData} unit={unit} />
       ) : (
         <ForecastChart forecastData={forecastData} unit={unit} />
       )}
       <p>
-        Dados fornecidos pela{" "}
-        <a href="https://openweathermap.org/">Open Weather API</a>
+        Dados fornecidos pela <a href={OPEN_WEATHER_URL}>Open Weather API</a>
       </p>
     </StyledMainContent>
   );
@@ -117,6 +118,6 @@ function isTodayClicked(innerHtml: string): boolean {
   return innerHtml === "Hoje";
 }
 
-function isTodaySelected(selected: string): boolean {
-  return selected === "today";
+function isTodaySelected(selected: Nav): boolean {
+  return selected === Nav.Today;
 }

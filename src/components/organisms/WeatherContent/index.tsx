@@ -3,10 +3,11 @@ import StyledWeatherContent from "./styled";
 import utils from "../../../utils/utils";
 import { WeatherData } from "../MainContent";
 import CasaquinhoMessage from "../../atoms/CasaquinhoMessage";
+import { Unit } from "../../../utils/enums";
 
 type WeatherProps = {
   weatherData: WeatherData | undefined;
-  unit: string;
+  unit: Unit;
 };
 
 export default function WeatherContent({ weatherData, unit }: WeatherProps) {
@@ -30,7 +31,7 @@ export default function WeatherContent({ weatherData, unit }: WeatherProps) {
           value={weatherData?.windSpeed || 0}
         />
       </div>
-      <CasaquinhoMessage minTemp={weatherData?.min}/>
+      <CasaquinhoMessage minTemp={weatherData?.min} />
     </StyledWeatherContent>
   );
 }

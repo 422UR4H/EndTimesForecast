@@ -10,5 +10,5 @@ const StyledSwitchBox = styled.div`
     flex-direction: row;
     gap: 25px;
   }
-`
+`;
 export default StyledSwitchBox;

@@ -24,6 +24,7 @@ export default function CitiesModal({
       <Overlay onClick={() => setShowModal(false)} />
       <div className="cities-list">
         <h1>Escolha sua cidade</h1>
+
         {citiesData.map((cityData, i) => (
           <MainButton key={i} onClick={() => handleClick(cityData.cityLatLng)}>
             <h2>

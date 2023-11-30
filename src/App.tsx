@@ -1,9 +1,11 @@
 import GlobalStyles from "./styles/global";
 import { ThemeProvider, DefaultTheme } from "styled-components";
-import light from './styles/themes/light';
-import dark from './styles/themes/dark';
+import light from "./styles/themes/light";
+import dark from "./styles/themes/dark";
 import usePersistedState from "./hooks/usePersistedState";
 import HomePage from "./pages/HomePage";
+import { THEME_PERSISTED_KEY } from "./utils/constants";
+import { Theme } from "./utils/enums";
 
 // type Todos = {
 //   userId: number;
@@ -13,11 +15,13 @@ import HomePage from "./pages/HomePage";
 // };
 
 function App() {
-  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light);
-  // const themeContext = useContext(ThemeContext);
+  const [theme, setTheme] = usePersistedState<DefaultTheme>(
+    THEME_PERSISTED_KEY,
+    light
+  );
 
   function toggleTheme() {
-    setTheme(theme.title === 'light' ? dark : light);
+    setTheme(theme.title === Theme.Light ? dark : light);
   }
 
   return (

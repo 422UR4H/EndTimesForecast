@@ -12,10 +12,11 @@ import { ForecastData } from "../../organisms/MainContent";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import StyledContentTooltip from "./styled";
+import { Unit } from "../../../utils/enums";
 
 type ForecastChartProps = {
   forecastData: ForecastData[] | undefined;
-  unit: string;
+  unit: Unit;
 };
 
 export default function ForecastChart({

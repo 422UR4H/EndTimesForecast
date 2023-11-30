@@ -12,16 +12,17 @@ import api from "../../../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 import utils from "../../../utils/utils";
 import StyledSidebarContent from "./style";
+import { Theme, Unit } from "../../../utils/enums";
 
 type SidebarContentProps = {
   temperatureData: TemperatureData;
   cityLatLng: CityLatLng | undefined;
   setCityLatLng(cityLatLng: CityLatLng): void;
-  unit: string;
-  setUnit(unit: string): void;
+  unit: Unit;
+  setUnit(unit: Unit): void;
   setCitiesData(citiesData: CityData[]): void;
   setShowModal(showModal: boolean): void;
-  themeTitle: string;
+  themeTitle: Theme;
   toggleTheme(): void;
 };
 
@@ -67,7 +68,7 @@ export default function SidebarContent({
   }, []);
 
   function toggleUnit() {
-    setUnit(unit === "celsius" ? "fahrenheit" : "celsius");
+    setUnit(unit === Unit.Celsius ? Unit.Fahrenheit : Unit.Celsius);
   }
 
   // TODO: type this

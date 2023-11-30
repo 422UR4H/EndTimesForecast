@@ -11,7 +11,7 @@ const StyledLocality = styled.div`
   }
 
   @media (max-width: 1325px) {
-    h1{
+    h1 {
       margin-block: 10px;
     }
     margin-bottom: 10px;

@@ -4,9 +4,17 @@ import CitiesModal from "../components/molecules/CitiesModal";
 import usePersistedState from "../hooks/usePersistedState";
 import MainContent from "../components/organisms/MainContent";
 import SidebarContent from "../components/organisms/SidebarContent";
+import {
+  BASE_URL_ICON,
+  FINAL_URL_ICON,
+  LAT_LNG_PERSISTED_KEY,
+  TEMP_UNIT_PERSISTED_KEY,
+  URL_ICON,
+} from "../utils/constants";
+import { Theme, Unit } from "../utils/enums";
 
 type HomePageProps = {
-  themeTitle: string;
+  themeTitle: Theme;
   toggleTheme(): void;
 };
 
@@ -30,27 +38,24 @@ export type TemperatureData = {
 };
 
 export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
-  // TODO: type this
   const [citiesData, setCitiesData] = useState<CityData[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [avgTemperature, setAvgTemperature] = useState<number | undefined>();
   const [sky, setSky] = useState<string>("");
   const [cityLatLng, setCityLatLng] = usePersistedState<CityLatLng | undefined>(
-    "lat_lng",
+    LAT_LNG_PERSISTED_KEY,
     undefined
   );
-  const [weatherIcon, setWeatherIcon] = useState<string>(
-    "https://openweathermap.org/img/wn/01d@2x.png"
-  );
-  const [unit, setUnit] = usePersistedState<string>(
-    "temperatureUnit",
-    "celsius"
+  const [weatherIcon, setWeatherIcon] = useState<string>(URL_ICON);
+  const [unit, setUnit] = usePersistedState<Unit>(
+    TEMP_UNIT_PERSISTED_KEY,
+    Unit.Celsius
   );
   const temperatureData = { avgTemperature, sky, weatherIcon };
 
   function setTemperatureData(sky: string, icon: string, temp: number) {
     setSky(sky);
-    setWeatherIcon("https://openweathermap.org/img/wn/" + icon + "@2x.png");
+    setWeatherIcon(BASE_URL_ICON + icon + FINAL_URL_ICON);
     setAvgTemperature(temp);
   }
 

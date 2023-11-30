@@ -1,5 +1,7 @@
+import { Theme } from "../../utils/enums";
+
 export default {
-  title: "dark",
+  title: Theme.Dark,
 
   colors: {
     primary: "#bf1a2f",

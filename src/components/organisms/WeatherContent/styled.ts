@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledWeatherContent = styled.div`
   width: 100%;
   max-width: 1100px;
-  
+
   & > div {
     width: 100%;
     height: 410px;
