@@ -1,6 +1,5 @@
 import {
   CartesianGrid,
-  Legend,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -10,6 +9,9 @@ import {
 } from "recharts";
 import utils from "../../../utils/utils";
 import { ForecastData } from "../../organisms/MainContent";
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
+import StyledContentTooltip from "./styled";
 
 type ForecastChartProps = {
   forecastData: ForecastData[] | undefined;
@@ -20,26 +22,41 @@ export default function ForecastChart({
   forecastData,
   unit,
 }: ForecastChartProps) {
+  const themeContext = useContext(ThemeContext);
+  const color = themeContext?.colors.primary;
+  const axisColor = themeContext?.colors.ternaryText;
+  const backgroundColor = themeContext?.colors.primaryBackground;
+  const secondaryBackgroundColor = themeContext?.colors.secondaryBackground;
+
   const formattedForecastData = forecastData?.map((fd: ForecastData) => {
     return {
       date: utils.getDateAndWeekday(fd.timestamp, "/"),
-      avgTemperature: utils.getConvertedTemperature(fd.avgTemperature, unit),
+      value: utils.getConvertedKelvin(fd.avgTemperature, unit).toFixed(1),
     };
   });
 
   return (
     <ResponsiveContainer width="100%" height={520}>
       <LineChart
+        style={{ backgroundColor: secondaryBackgroundColor }}
         data={formattedForecastData}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 50, right: 40, left: 30, bottom: 50 }}
       >
-        <CartesianGrid /*y={4}*/ />
-        <XAxis dataKey="date" />
-        <YAxis dataKey="avgTemperature" />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="date" stroke="#8884d8" />
-        <Line type="monotone" dataKey="avgTemperature" stroke="#82ca9d" />
+        <CartesianGrid stroke="#EFEFEF" />
+        <XAxis dataKey="date" stroke={axisColor} />
+        <YAxis dataKey="value" stroke={axisColor} unit={utils.getUnit(unit)} />
+        <Tooltip
+          contentStyle={{ ...StyledContentTooltip, backgroundColor }}
+          formatter={(value: number) => [`${value} ${utils.getUnit(unit)}`]}
+        />
+        <Line name=" " type="monotone" />
+        <Line
+          dataKey="value"
+          stroke={color}
+          dot={{ strokeWidth: 1.5, r: 4 }}
+          activeDot={{ stroke: "#FFFFFF", strokeWidth: 0.5, r: 4 }}
+          strokeWidth={1.5}
+        />
       </LineChart>
     </ResponsiveContainer>
   );

@@ -16,19 +16,31 @@ function toUpperFirstLetter(name: string) {
     .join(" ");
 }
 
-function getConvertedTemperature(kelvin: number, unit: string): string {
+function getConvertedKelvin(kelvin: number, unit: string): number {
   if (unit === "celsius") return convertKelvinToCelsius(kelvin);
   return convertKelvinToFahrenheit(kelvin);
 }
 
-function convertKelvinToCelsius(kelvin: number): string {
-  return (isNaN(kelvin) ? 0 : Math.round(kelvin - 273.15)) + "°C";
+function getConvertedTemperature(kelvin: number, unit: string): string {
+  let convertedTemperature: number;
+  if (unit === "celsius") {
+    convertedTemperature = convertKelvinToCelsius(kelvin);
+  } else {
+    convertedTemperature = convertKelvinToFahrenheit(kelvin);
+  }
+  return Math.round(convertedTemperature) + getUnit(unit);
 }
 
-function convertKelvinToFahrenheit(kelvin: number): string {
-  return (
-    (isNaN(kelvin) ? 0 : Math.round(((kelvin - 273.15) * 9) / 5 + 32)) + "°F"
-  );
+function convertKelvinToCelsius(kelvin: number): number {
+  return isNaN(kelvin) ? 0 : kelvin - 273.15;
+}
+
+function convertKelvinToFahrenheit(kelvin: number): number {
+  return isNaN(kelvin) ? 0 : ((kelvin - 273.15) * 9) / 5 + 32;
+}
+
+function getUnit(unit: string) {
+  return unit === "celsius" ? "°C" : "°F";
 }
 
 function dateFormat(date: string | Date, joinChar = "-") {
@@ -84,7 +96,9 @@ function formatHour(hour: string, char = ":"): string {
 }
 
 const utils = {
+  getUnit,
   errorAlert,
+  getConvertedKelvin,
   getConvertedTemperature,
   convertKelvinToCelsius,
   convertKelvinToFahrenheit,
