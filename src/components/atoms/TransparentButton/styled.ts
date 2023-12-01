@@ -16,5 +16,10 @@ const StyledTransparentButton = styled.button<StyledTransparentButtonProps>`
 
   outline: none;
   cursor: pointer;
+
+  @media (max-width: 573px) {
+    font-size: 8dvw;
+    line-height: 8dvw;
+  }
 `;
 export default StyledTransparentButton;

@@ -26,5 +26,9 @@ const StyledMainInput = styled.input`
 
     padding-top: 8px;
   }
+
+  @media (max-width: 685px) {
+    width: 80dvw;
+  }
 `;
 export default StyledMainInput;

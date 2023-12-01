@@ -24,5 +24,23 @@ const StyledTemperature = styled.div<{ $color: string }>`
 
     color: ${({ theme }) => theme.colors.primaryText};
   }
+
+  @media (max-width: 685px) {
+    width: 70dvw;
+    height: 30dvw;
+
+    div {
+      width: 70dvw;
+      font-size: 22dvw;
+
+      sup {
+        font-size: 18dvw;
+      }
+      img {
+        width: 50%;
+        height: 50%;
+      }
+    }
+  }
 `;
 export default StyledTemperature;
