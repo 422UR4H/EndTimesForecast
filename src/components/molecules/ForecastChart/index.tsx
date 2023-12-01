@@ -37,7 +37,7 @@ export default function ForecastChart({
   });
 
   return (
-    <ResponsiveContainer width="100%" height={520}>
+    <ResponsiveContainer width="100%" height={450}>
       <LineChart
         style={{ backgroundColor: secondaryBackgroundColor }}
         data={formattedForecastData}
