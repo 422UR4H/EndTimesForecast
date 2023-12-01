@@ -48,7 +48,7 @@ export default function ForecastChart({
         <YAxis dataKey="value" stroke={axisColor} unit={utils.getUnit(unit)} />
         <Tooltip
           contentStyle={{ ...StyledContentTooltip, backgroundColor }}
-          formatter={(value: number) => [`${value} ${utils.getUnit(unit)}`]}
+          formatter={(value: number) => [`${value}${utils.getUnit(unit)}`]}
         />
         <Line name=" " type="monotone" />
         <Line
