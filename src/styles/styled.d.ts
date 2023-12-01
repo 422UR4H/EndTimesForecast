@@ -10,12 +10,20 @@ declare module "styled-components" {
 
       primaryBackground: string;
       secondaryBackground: string;
+      inputBackground: string;
+
+      shadow: string;
+      placeholder: string;
+
+      selectedButton: string;
 
       primaryText: string;
       secondaryText: string;
       ternaryText: string;
 
       link: string;
+
+      switchOff: string;
     };
   }
 }

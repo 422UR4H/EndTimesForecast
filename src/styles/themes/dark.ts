@@ -9,12 +9,20 @@ export default {
 
     primaryBackground: "#2c2926",
     secondaryBackground: "#211f1c",
+    inputBackground: "#2c2926",
+
+    shadow: "#bf1a2f",
+    placeholder: "#AFADAD",
+
+    selectedButton: "#bf1a2f",
 
     primaryText: "#F5F5F5",
     // secondaryText: "#06bcc1",
-    secondaryText: "#bf1a2f",
+    secondaryText: "#7b7b7b",
     ternaryText: "#AFADAD",
 
     link: "#96A7F2",
+
+    switchOff: "#7b7b7b",
   },
 };

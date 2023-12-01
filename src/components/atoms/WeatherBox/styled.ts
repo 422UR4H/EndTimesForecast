@@ -7,7 +7,7 @@ const StyledWeatherBox = styled.div`
   padding-block: 50px;
   padding-inline: 45px;
 
-  color: ${({ theme }) => theme.colors.primaryBackground};
+  color: ${({ theme }) => theme.colors.secondaryBackground};
   background-color: ${({ theme }) => theme.colors.primary};
 
   display: flex;

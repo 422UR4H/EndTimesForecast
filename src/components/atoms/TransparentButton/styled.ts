@@ -12,7 +12,7 @@ const StyledTransparentButton = styled.button<StyledTransparentButtonProps>`
   background-color: transparent;
 
   color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.primaryText : theme.colors.secondaryText};
+    $isSelected ? theme.colors.selectedButton : theme.colors.secondaryText};
 
   outline: none;
   cursor: pointer;

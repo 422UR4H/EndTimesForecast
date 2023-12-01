@@ -43,7 +43,7 @@ export default function ForecastChart({
         data={formattedForecastData}
         margin={{ top: 50, right: 40, left: 30, bottom: 50 }}
       >
-        <CartesianGrid stroke="#EFEFEF" />
+        <CartesianGrid stroke={backgroundColor} />
         <XAxis dataKey="date" stroke={axisColor} />
         <YAxis dataKey="value" stroke={axisColor} unit={utils.getUnit(unit)} />
         <Tooltip
@@ -54,7 +54,7 @@ export default function ForecastChart({
         <Line
           dataKey="value"
           stroke={color}
-          dot={{ strokeWidth: 1.5, r: 4 }}
+          dot={{ stroke: color, strokeWidth: 1.5, r: 4 }}
           activeDot={{ stroke: "#FFFFFF", strokeWidth: 0.5, r: 4 }}
           strokeWidth={1.5}
         />

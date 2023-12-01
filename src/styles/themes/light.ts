@@ -7,13 +7,22 @@ export default {
     primary: "#4D4494",
     secondary: "#EC6E4C",
 
-    primaryBackground: "#D8D8D8",
-    secondaryBackground: "#F5F5F5",
+    primaryBackground: "#EFEFEF",
+    secondaryBackground: "#FFFFFF",
+    // secondaryBackground: "#F5F5F5",
+    inputBackground: "#EDEDEF",
+
+    shadow: "#314F7C14",
+    placeholder: "#424243",
+
+    selectedButton: "#222222",
 
     primaryText: "#222222",
     secondaryText: "#C8C8C8",
     ternaryText: "#AFADAD",
 
     link: "#96A7F2",
+
+    switchOff: "#E9E9EA",
   },
 };

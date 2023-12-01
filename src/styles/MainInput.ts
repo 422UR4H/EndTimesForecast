@@ -10,13 +10,12 @@ const StyledMainInput = styled.input`
   padding-left: 67px;
   margin-bottom: 7px;
   border-radius: 24px;
-  box-shadow: 0px 24px 48px 0px ${({ theme }) => theme.colors.secondaryText};
-  /* box-shadow: 0px 24px 48px 0px #314f7c14; */
   border: none;
   outline: none;
 
   color: ${({ theme }) => theme.colors.primaryText};
-  background-color: ${({ theme }) => theme.colors.primaryBackground};
+  background-color: ${({ theme }) => theme.colors.inputBackground};
+  box-shadow: 0px 24px 48px 0px ${({ theme }) => theme.colors.shadow};
 
   &::placeholder {
     font-family: "Montserrat", sans-serif;
@@ -25,6 +24,7 @@ const StyledMainInput = styled.input`
     line-height: 24px;
 
     padding-top: 8px;
+    color: ${({ theme }) => theme.colors.placeholder};
   }
 
   @media (max-width: 685px) {
