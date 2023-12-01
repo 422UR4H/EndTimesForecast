@@ -28,7 +28,7 @@ export default function WeatherContent({ weatherData, unit }: WeatherProps) {
         />
         <WeatherBox
           title="Velocidade do vento"
-          value={weatherData?.windSpeed || 0}
+          value={(weatherData?.windSpeed.toPrecision(2) || 0) + "m/s"}
         />
       </div>
       <CasaquinhoMessage minTemp={weatherData?.min} />
