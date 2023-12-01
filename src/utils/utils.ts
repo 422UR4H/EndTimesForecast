@@ -1,7 +1,11 @@
 import Swal from "sweetalert2";
 import { Unit } from "./enums";
 
-function errorAlert(background?: string, color?: string, buttonColor?: string): void {
+function errorAlert(
+  background?: string,
+  color?: string,
+  buttonColor?: string
+): void {
   Swal.fire({
     icon: "error",
     title: "Oops...",
@@ -10,6 +14,21 @@ function errorAlert(background?: string, color?: string, buttonColor?: string): 
     color: color,
     confirmButtonColor: buttonColor,
     // footer: '<a href="#">Por que eu estou vendo esse problema?</a>',
+  });
+}
+
+function cityNotFoundAlert(
+  background?: string,
+  color?: string,
+  buttonColor?: string
+): void {
+  Swal.fire({
+    icon: "error",
+    title: "Cidade não encontrada!",
+    text: "Desculpe, não foi possível encontrar esta cidade no momento.",
+    background: background,
+    color: color,
+    confirmButtonColor: buttonColor,
   });
 }
 
@@ -102,6 +121,7 @@ function formatHour(hour: string, char = ":"): string {
 const utils = {
   getUnit,
   errorAlert,
+  cityNotFoundAlert,
   getConvertedKelvin,
   getConvertedTemperature,
   convertKelvinToCelsius,

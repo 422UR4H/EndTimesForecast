@@ -87,8 +87,16 @@ export default function SidebarContent({
     api
       .getGeocoding(inputCity)
       .then((response: AxiosResponse) => {
+        if (!response.data.results || response.data.results.length < 1) {
+          utils.cityNotFoundAlert(background, color, buttonColor);
+          return;
+        }
         const cities: CityData[] = response.data.results.map(getCityData);
         setCitiesData(cities);
+        if (cities.length === 1) {
+          setCityLatLng(cities[0].cityLatLng);
+          return;
+        }
         setShowModal(true);
       })
       .catch((error: AxiosError) => {
