@@ -1,10 +1,11 @@
+import { MouseEvent } from "react";
 import { Nav } from "../../../utils/enums";
 import TransparentButton from "../../atoms/TransparentButton";
 import StyledNavBar from "./styled";
 
 type NavBarProps = {
   selected: Nav;
-  handleClick(e: any): void;
+  handleClick(e: MouseEvent): void;
 };
 
 export default function NavBar({ selected, handleClick }: NavBarProps) {

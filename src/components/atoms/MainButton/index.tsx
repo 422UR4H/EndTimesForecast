@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 import StyledMainButton from "./styled";
 
 type MainButtonProps = {
   children: ReactNode;
-  onClick(e: any): void;
+  onClick(e: MouseEvent): void;
 };
 
 export default function MainButton({ children, onClick }: MainButtonProps) {

@@ -14,7 +14,7 @@ export default function CitiesModal({
   setShowModal,
   setCityLatLng,
 }: CitiesModalProps) {
-  function handleClick(cityLatLng: CityLatLng) {
+  function handleClick(cityLatLng: CityLatLng): void {
     setCityLatLng(cityLatLng);
     setShowModal(false);
   }

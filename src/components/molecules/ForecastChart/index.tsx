@@ -19,6 +19,11 @@ type ForecastChartProps = {
   unit: Unit;
 };
 
+type FormattedForecastData = {
+  date: string;
+  value: string;
+};
+
 export default function ForecastChart({
   forecastData,
   unit,
@@ -29,12 +34,14 @@ export default function ForecastChart({
   const backgroundColor = themeContext?.colors.primaryBackground;
   const secondaryBackgroundColor = themeContext?.colors.secondaryBackground;
 
-  const formattedForecastData = forecastData?.map((fd: ForecastData) => {
-    return {
-      date: utils.getDateAndWeekday(fd.timestamp, "/"),
-      value: utils.getConvertedKelvin(fd.avgTemperature, unit).toFixed(1),
-    };
-  });
+  const formattedForecastData = forecastData?.map(
+    (fd: ForecastData): FormattedForecastData => {
+      return {
+        date: utils.getDateAndWeekday(fd.timestamp, "/"),
+        value: utils.getConvertedKelvin(fd.avgTemperature, unit).toFixed(1),
+      };
+    }
+  );
 
   return (
     <ResponsiveContainer width="100%" height={450}>

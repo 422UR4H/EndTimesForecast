@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 import StyledTransparentButton from "./styled";
 
 type TransparentButtonProps = {
   children: ReactNode;
-  onClick(e: any): void;
+  onClick(e: MouseEvent): void;
   isSelected: boolean;
 };
 

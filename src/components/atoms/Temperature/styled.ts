@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-const StyledTemperature = styled.div<{ $color: string }>`
+type StyledTemperatureProps = {
+  $color: string;
+};
+
+const StyledTemperature = styled.div<StyledTemperatureProps>`
   color: ${({ theme }) => theme.colors.secondary};
   height: 184px;
 

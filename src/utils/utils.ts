@@ -32,7 +32,7 @@ function cityNotFoundAlert(
   });
 }
 
-function toUpperFirstLetter(name: string) {
+function toUpperFirstLetter(name: string): string {
   return name
     .split(" ")
     .map((n) => n[0].toUpperCase() + n.substring(1))
@@ -66,12 +66,12 @@ function getUnit(unit: Unit) {
   return unit === Unit.Celsius ? "°C" : "°F";
 }
 
-function dateFormat(date: string | Date, joinChar = "-") {
+function dateFormat(date: string | Date, joinChar = "-"): string {
   if (typeof date !== "string") date = date.toISOString();
   return date.split("T")[0].split("-").reverse().join(joinChar);
 }
 
-function getDateAndWeekday(date: number | Date, joinChar = "-") {
+function getDateAndWeekday(date: number | Date, joinChar = "-"): string {
   if (typeof date === "number") date = new Date(date);
 
   const splittedDate = dateFormat(date.toISOString(), joinChar).split(joinChar);
@@ -84,7 +84,7 @@ function getDateAndWeekday(date: number | Date, joinChar = "-") {
   return newDate + " (" + weekday + ")";
 }
 
-function getWeekdayAndHour(date: string | Date) {
+function getWeekdayAndHour(date: string | Date): string {
   if (typeof date !== "string") date = date.toString();
 
   const day = date.split(" ");

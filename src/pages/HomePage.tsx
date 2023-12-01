@@ -53,7 +53,7 @@ export default function HomePage({ themeTitle, toggleTheme }: HomePageProps) {
   );
   const temperatureData = { avgTemperature, sky, weatherIcon };
 
-  function setTemperatureData(sky: string, icon: string, temp: number) {
+  function setTemperatureData(sky: string, icon: string, temp: number): void {
     setSky(sky);
     setWeatherIcon(BASE_URL_ICON + icon + FINAL_URL_ICON);
     setAvgTemperature(temp);
