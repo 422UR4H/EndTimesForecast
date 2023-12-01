@@ -1,11 +1,14 @@
 import Swal from "sweetalert2";
 import { Unit } from "./enums";
 
-function errorAlert(): void {
+function errorAlert(background?: string, color?: string, buttonColor?: string): void {
   Swal.fire({
     icon: "error",
     title: "Oops...",
     text: "Algo deu errado!",
+    background: background,
+    color: color,
+    confirmButtonColor: buttonColor,
     // footer: '<a href="#">Por que eu estou vendo esse problema?</a>',
   });
 }

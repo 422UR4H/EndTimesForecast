@@ -7,12 +7,13 @@ import StyledLine from "../../../styles/Line";
 import MainDate from "../../atoms/MainDate";
 import SwitchBox from "../../molecules/SwitchBox";
 import { CityData, CityLatLng, TemperatureData } from "../../../pages/HomePage";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import api from "../../../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 import utils from "../../../utils/utils";
 import StyledSidebarContent from "./style";
 import { Theme, Unit } from "../../../utils/enums";
+import { ThemeContext } from "styled-components";
 
 type SidebarContentProps = {
   temperatureData: TemperatureData;
@@ -42,6 +43,11 @@ export default function SidebarContent({
   const { avgTemperature, sky, weatherIcon } = temperatureData;
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const themeContext = useContext(ThemeContext);
+  const buttonColor = themeContext?.colors.primary;
+  const background = themeContext?.colors.secondaryBackground;
+  const color = themeContext?.colors.primaryText;
+
   useEffect(() => {
     const input = inputRef.current;
     if (input != null) input.focus();
@@ -60,7 +66,7 @@ export default function SidebarContent({
             })
             .catch((error: AxiosError) => {
               console.log(error);
-              utils.errorAlert();
+              utils.errorAlert(background, color, buttonColor);
             });
         }
       );
@@ -87,7 +93,7 @@ export default function SidebarContent({
       })
       .catch((error: AxiosError) => {
         console.log(error);
-        utils.errorAlert();
+        utils.errorAlert(background, color, buttonColor);
       });
   }
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Locality from "../../atoms/Locality";
 import ForecastChart from "../../molecules/ForecastChart";
 import NavBar from "../../molecules/NavBar";
@@ -10,6 +10,7 @@ import utils from "../../../utils/utils";
 import StyledMainContent from "./styled";
 import { Nav, Unit } from "../../../utils/enums";
 import { OPEN_WEATHER_URL } from "../../../utils/constants";
+import { ThemeContext } from "styled-components";
 
 type MainContentProps = {
   cityLatLng: CityLatLng | undefined;
@@ -37,6 +38,10 @@ export default function MainContent({
   const [weatherData, setWeatherData] = useState<WeatherData | undefined>();
   const [forecastData, setForecastData] = useState<ForecastData[]>();
   const [selected, setSelected] = useState<Nav>(Nav.Today);
+  const themeContext = useContext(ThemeContext);
+  const buttonColor = themeContext?.colors.primary;
+  const background = themeContext?.colors.secondaryBackground;
+  const color = themeContext?.colors.primaryText;
 
   useEffect(() => {
     if (cityLatLng?.lat == undefined || cityLatLng?.lng == undefined) {
@@ -63,7 +68,7 @@ export default function MainContent({
       })
       .catch((error: AxiosError) => {
         console.log(error);
-        utils.errorAlert();
+        utils.errorAlert(background, color, buttonColor);
       });
   }
 
@@ -83,7 +88,7 @@ export default function MainContent({
       })
       .catch((error: AxiosError) => {
         console.log(error);
-        utils.errorAlert();
+        utils.errorAlert(background, color, buttonColor);
       });
   }
 
