@@ -11,7 +11,7 @@ import utils from "../../../utils/utils";
 import { ForecastData } from "../../organisms/MainContent";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
-import StyledContentTooltip from "./styled";
+import { StyledContentTooltip } from "./styled";
 import { Unit } from "../../../utils/enums";
 
 type ForecastChartProps = {
@@ -44,7 +44,7 @@ export default function ForecastChart({
   );
 
   return (
-    <ResponsiveContainer width="100%" height={450}>
+    <ResponsiveContainer width="100%" height={450} className="container">
       <LineChart
         style={{ backgroundColor: secondaryBackgroundColor }}
         data={formattedForecastData}

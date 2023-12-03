@@ -13,7 +13,8 @@ const StyledSidebarContent = styled.div`
 
   @media (max-width: 1325px) {
     width: 100%;
-    min-height: 820px;
+    /* min-height: 820px; */
+    /* min-height: 70svh; */
   }
 `;
 export default StyledSidebarContent;

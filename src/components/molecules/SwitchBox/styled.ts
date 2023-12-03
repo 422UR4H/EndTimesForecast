@@ -7,6 +7,7 @@ const StyledSwitchBox = styled.div`
   gap: 12px;
 
   @media (max-width: 1325px) {
+    margin-bottom: 50px;
     flex-direction: row;
     gap: 25px;
   }

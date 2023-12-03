@@ -11,6 +11,10 @@ const StyledHeader = styled.header`
     font-weight: 600;
   }
 
+  @media (max-width: 1325px) {
+    margin-bottom: 30px;
+  }
+
   @media (max-width: 685px) {
     justify-content: space-around;
     width: 80dvw;

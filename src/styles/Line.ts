@@ -5,5 +5,9 @@ const StyledLine = styled.div`
   max-width: 395px;
   width: 100%;
   height: 5px;
+
+  @media (max-width: 1325px) {
+    margin-bottom: 50px;
+  }
 `;
 export default StyledLine;

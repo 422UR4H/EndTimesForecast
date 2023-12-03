@@ -10,8 +10,12 @@ const StyledMainContent = styled.div`
 
   @media (max-width: 1325px) {
     width: 100%;
-    min-height: 96dvh;
+    /* min-height: 96svh; */
     padding-inline: 50px;
+
+    .container {
+      margin-bottom: 70px;
+    }
   }
 `;
 export default StyledMainContent;

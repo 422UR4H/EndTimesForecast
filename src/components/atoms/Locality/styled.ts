@@ -22,7 +22,7 @@ const StyledLocality = styled.div`
     h1 {
       margin-block: 10px;
     }
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
 `;
 export default StyledLocality;

@@ -29,6 +29,10 @@ const StyledTemperature = styled.div<StyledTemperatureProps>`
     color: ${({ theme }) => theme.colors.primaryText};
   }
 
+  @media (max-width: 1325px) {
+    margin-bottom: 50px;
+  }
+
   @media (max-width: 685px) {
     width: 70dvw;
     height: 30dvw;

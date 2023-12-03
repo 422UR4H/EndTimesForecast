@@ -13,5 +13,9 @@ const StyledSearchForm = styled.form`
     top: 22px;
     left: 20px;
   }
+
+  @media (max-width: 1325px) {
+    margin-bottom: 50px;
+  }
 `;
 export default StyledSearchForm;

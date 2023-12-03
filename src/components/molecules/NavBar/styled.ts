@@ -5,5 +5,9 @@ const StyledNavBar = styled.div`
   max-width: 509px;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 1325px) {
+    margin-bottom: 20px;
+  }
 `;
 export default StyledNavBar;
