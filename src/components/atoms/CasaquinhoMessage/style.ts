@@ -6,8 +6,8 @@ const StyledCasaquinhoMessage = styled.p`
   color: ${({ theme }) => theme.colors.ternaryText};
 
   @media (max-width: 1325px) {
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 13px;
+    line-height: 14px;
     margin-bottom: 10px;
   }
 `;
