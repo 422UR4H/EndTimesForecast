@@ -16,10 +16,10 @@ const StyledMainContent = styled.div`
     .container {
       margin-bottom: 70px;
     }
-
     p {
-      font-size: 16px;
+      font-size: 15px;
       line-height: 18px;
+      margin-bottom: 10px;
     }
   }
 `;

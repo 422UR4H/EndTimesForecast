@@ -21,6 +21,7 @@ const StyledLocality = styled.div`
   @media (max-width: 1325px) {
     h1 {
       margin-block: 10px;
+      font-size: 10dvw;
     }
     margin-bottom: 30px;
   }
