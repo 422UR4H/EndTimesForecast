@@ -16,6 +16,11 @@ const StyledMainContent = styled.div`
     .container {
       margin-bottom: 70px;
     }
+
+    p {
+      font-size: 18px;
+      line-height: 20px;
+    }
   }
 `;
 export default StyledMainContent;

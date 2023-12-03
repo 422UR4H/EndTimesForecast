@@ -27,6 +27,15 @@ const StyledMainInput = styled.input`
     color: ${({ theme }) => theme.colors.placeholder};
   }
 
+  @media (max-width: 1325px) {
+    font-size: 20px;
+    line-height: 22px;
+    &::placeholder {
+      font-size: 20px;
+    line-height: 22px;
+    }
+  }
+
   @media (max-width: 685px) {
     width: 80dvw;
   }
