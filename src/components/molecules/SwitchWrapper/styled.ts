@@ -8,6 +8,11 @@ const StyledSwitchBox = styled.div`
   @media (max-width: 1325px) {
     width: fit-content;
     gap: 30px;
+
+    p {
+      font-size: 16px;
+      line-height: 18px;
+    }
   }
 `;
 export default StyledSwitchBox;

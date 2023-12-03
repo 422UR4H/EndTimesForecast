@@ -15,6 +15,10 @@ const StyledSidebarContent = styled.div`
     width: 100%;
     /* min-height: 820px; */
     /* min-height: 70svh; */
+    & > p {
+      font-size: 16px;
+      line-height: 18px;
+    }
   }
 `;
 export default StyledSidebarContent;

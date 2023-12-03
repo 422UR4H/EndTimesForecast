@@ -18,8 +18,8 @@ const StyledMainContent = styled.div`
     }
 
     p {
-      font-size: 18px;
-      line-height: 20px;
+      font-size: 16px;
+      line-height: 18px;
     }
   }
 `;
