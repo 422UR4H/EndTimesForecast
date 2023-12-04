@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
 const StyledLocality = styled.div`
+  max-width: 1100px;
+
   h1 {
     font-weight: 400;
-    font-size: 7dvw;
+    font-size: 6dvw;
     line-height: 8dvw;
+
+    text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
   }
   p {
     white-space: pre-wrap;
