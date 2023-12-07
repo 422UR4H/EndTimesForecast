@@ -12,6 +12,18 @@ This project is part of the technical challenge "Levo um casaquinho?", developed
 
 <br />
 
+
+# Título
+
+**pt-br:**
+
+Este é o título do README em português.
+
+**en:**
+
+This is the README title in English.
+
+
 ## Quick start
 
 Clone this repository following the list of commands to install the dependencies.
