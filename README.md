@@ -12,16 +12,6 @@ This project is part of the technical challenge "Levo um casaquinho?", developed
 
 <br />
 
-
-~~~javascript
-teste ingles
-~~~
-
-~~~typescript
-teste pt
-~~~
-
-
 ## Quick start
 
 Clone this repository following the list of commands to install the dependencies.
