@@ -12,6 +12,16 @@ This project is part of the technical challenge "Levo um casaquinho?", developed
 
 <br />
 
+
+**Portugues:**
+
+Uma API RESTful com Modelagem Orientada a Domínio (Domain-Driven Modeling) construída com TypeScript e Nest.js para a Aplicação Web HxH_RPG_Environment.
+
+**English:**
+
+A RESTful API with Domain-Driven Modeling built in TypeScript and Nest.js for the HxH_RPG_Environment Web App.
+
+
 ## Quick start
 
 Clone this repository following the list of commands to install the dependencies.
