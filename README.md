@@ -2,6 +2,8 @@
 
 A Front-end web application for checking current and forecast weather.
 
+![AnimaçãoEndTimesForecast](https://github.com/422UR4H/EndTimesForecast/assets/36780789/4b29ceba-1840-4b36-b973-6b61d03d1454)
+
 ## Description
 
 This project is part of the technical challenge "Levo um casaquinho?", developed to provide updated information about the current temperature, the weather forecast for the next few days and also give an opinion on whether or not you should take a cardigan if you are going out 😅. Using modern technologies, this application offers an intuitive and friendly interface for users to view meteorological data from different locations (with a focus on Brazil).
